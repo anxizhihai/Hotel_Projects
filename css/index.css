@@ -1,0 +1,435 @@
+body,
+html {
+    padding: 0px;
+    margin: 0px;
+}
+
+.maxdiv {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+}
+
+.bgimg {
+    width: 1536px;
+    height: 322px;
+    background: url("../img/jiudian.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 322px;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    opacity: 0.8;
+    background: #5944C3;
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
+.headerbox {
+    width: 1400px;
+    height: 60px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.logobox {
+    width: 600px;
+    height: 60px;
+    position: absolute;
+}
+
+.logo {
+    width: 600px;
+    height: 60px;
+    position: relative;
+}
+
+.logo img {
+    width: 76.8px;
+    height: 25px;
+    position: absolute;
+    left: 40px;
+    top: 18px;
+}
+
+.logoemp {
+    display: inline-block;
+    width: 17px;
+    height: 24px;
+    border-left: 2px solid #FFFFFF;
+    position: absolute;
+    left: 128px;
+    top: 19px;
+}
+
+.logospan {
+    display: inline-block;
+    font-family: PingFangSC-Regular;
+    font-size: 24px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    width: 109px;
+    height: 33px;
+    position: absolute;
+    left: 137px;
+    top: 14px;
+}
+
+.loginregbox {
+    width: 150px;
+    position: absolute;
+    left: 1200px;
+}
+
+.loginreg {
+    width: 150px;
+    height: 60px;
+    position: relative;
+}
+
+.reg {
+    display: inline-block;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    position: absolute;
+    left: 30px;
+    top: 20px;
+}
+
+.login {
+    display: inline-block;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    position: absolute;
+    left: 75px;
+    top: 20px;
+}
+
+
+/*三个input框*/
+
+.choicecityin {
+    width: 240px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #303030;
+    letter-spacing: 0;
+    border: 1px solid #FFFFFF;
+}
+
+.choicedatein {
+    width: 240px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #303030;
+    letter-spacing: 0;
+    border: 1px solid #FFFFFF;
+}
+
+.choicemessagein {
+    width: 240px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #303030;
+    letter-spacing: 0;
+    border: 1px solid #FFFFFF;
+}
+
+.choicecity {
+    width: 240px;
+    height: 40px;
+    position: relative;
+}
+
+.choicecityin {
+    position: absolute;
+}
+
+.choicecity img {
+    position: absolute;
+    left: 220px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.choicedate {
+    width: 240px;
+    height: 40px;
+    position: relative;
+}
+
+.choicedatein {
+    position: absolute;
+}
+
+.choicedate img {
+    position: absolute;
+    left: 220px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.choicecity {
+    width: 240px;
+    height: 40px;
+    position: relative;
+}
+
+.threeinput {
+    width: 1400px;
+    height: 60px;
+    margin: 0 auto;
+    margin-top: 80px;
+    position: relative;
+}
+
+.choicecitybox {
+    position: absolute;
+    left: 300px;
+}
+
+.choicedatebox {
+    position: absolute;
+    left: 600px;
+}
+
+.choicemessagebox {
+    position: absolute;
+    left: 900px;
+}
+
+
+/*城市列表*/
+
+.ajaxcity {
+    position: absolute;
+}
+
+.ajaxcitylist {
+    width: 480px;
+    height: 43px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+.navigation_bar {
+    width: 514px;
+    height: 43px;
+    border-bottom: 1px solid #5944C3;
+}
+
+.navigation_bar span {
+    display: inline-block;
+    width: 70px;
+    height: 43px;
+    margin-right: 3px;
+    line-height: 43px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ajaxlist {
+    width: 515px;
+    height: 120px;
+    clear: both;
+}
+
+
+/*搜索按钮*/
+
+.search {
+    width: 1400px;
+    height: 60px;
+    margin: 0 auto;
+    margin-top: 12px;
+    position: relative;
+}
+
+.searchbutton {
+    position: absolute;
+    left: 680px;
+}
+
+.btn {
+    background: #5944C3;
+    border-radius: 2px;
+    border: none;
+    width: 81px;
+    height: 36px;
+}
+
+.ajaxlist1 {
+    width: 480px;
+    height: 140px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+.ajaxlist2 {
+    width: 480px;
+    height: 500px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+.ajaxlist3 {
+    width: 480px;
+    height: 500px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+.ajaxlist4 {
+    width: 480px;
+    height: 500px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+.ajaxlist5 {
+    width: 480px;
+    height: 500px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+.ajaxlist6 {
+    width: 480px;
+    height: 500px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+.ajaxlistrm {
+    padding-left: 1px;
+}
+
+.ajaxlistxz {
+    padding-left: 20px;
+}
+
+.ajaxlistrw {
+    padding-left: 20px;
+}
+
+.ajaxlistlq {
+    padding-left: 20px;
+}
+
+.ajaxlistgk {
+    padding-left: 20px;
+}
+
+.ajaxlistaf {
+    padding-left: 20px;
+}
+
+.li-list0 {
+    width: 70px;
+    height: 30px;
+    float: left;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.li-list {
+    width: 90px;
+    height: 30px;
+    float: left;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.li-list1 {
+    width: 90px;
+    height: 30px;
+    float: left;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.li-list2 {
+    width: 90px;
+    height: 30px;
+    float: left;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.li-list3 {
+    width: 90px;
+    height: 30px;
+    float: left;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.li-list4 {
+    width: 90px;
+    height: 30px;
+    float: left;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+
+/*时间选择器*/
+
+.choicetimes {
+    width: 515px;
+    height: 258px;
+    background: #FFFFFF;
+    border: 1px solid #D3DCE6;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+    position: relative;
+}
+
+.choicetimes1 {
+    width: 257px;
+    height: 258px;
+    background: #FFFFFF;
+    border-right: 1px solid #E0E6ED;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+    position: absolute;
+}
+
+.choicetimes2 {
+    width: 257px;
+    height: 258px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+    position: absolute;
+    left: 257px;
+}

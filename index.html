@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="maxdiv">
+        <div class="bgimg">
+            <!--页头-->
+            <div class="header">
+                <div class="headerbox">
+                    <div class="logobox">
+                        <div class="logo">
+                            <img src="img/logo_white.png">
+                            <span class="logoemp"></span>
+                            <span class="logospan">酒店项目</span>
+                        </div>
+                    </div>
+                    <div class="loginregbox">
+                        <div class="loginreg">
+                            <a class="login">登录</a>
+                            <a class="reg">注册</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--内容-->
+            <div class="threeinput">
+                <div class="choicecitybox">
+                    <div class="choicecity"> <input id="tresult" class="choicecityin" style="text-indent:1em;" type="text" placeholder="请选择城市"><img class="onclickimg" src="img/icon_location.png"></div>
+                    <!--城市列表-->
+                    <div class="ajaxcity">
+                        <div class="ajaxcitylist" style="display:none">
+                            <div class="navigation_bar">
+                                <span class="navigation1">热门</span>
+                                <span class="navigation2">ABCDEF</span>
+                                <span class="navigation3">GHJK</span>
+                                <span class="navigation4">LMNPQ</span>
+                                <span class="navigation5">RSTW</span>
+                                <span class="navigation6">XYZ</span>
+                            </div>
+                            <div class="ajaxlist1">
+                                <div class="ajaxlistrm">
+                                    <ul class="ul-listrm" id="tcontent">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--abcdef-->
+                            <div class="ajaxlist2" style="display:none">
+                                <div class="ajaxlistaf">
+                                    <ul class="ul-list"></ul>
+                                </div>
+                            </div>
+                            <!--ghjk-->
+                            <div class="ajaxlist3" style="display:none">
+                                <div class="ajaxlistgk">
+                                    <ul class="ul-listgk"></ul>
+                                </div>
+                            </div>
+                            <!--lmnpq-->
+                            <div class="ajaxlist4" style="display:none">
+                                <div class="ajaxlistlq">
+                                    <ul class="ul-listlq"></ul>
+                                </div>
+                            </div>
+                            <!--rstw-->
+                            <div class="ajaxlist5" style="display:none">
+                                <div class="ajaxlistrw">
+                                    <ul class="ul-listrw"></ul>
+                                </div>
+                            </div>
+                            <!--xyz-->
+                            <div class="ajaxlist6" style="display:none">
+                                <div class="ajaxlistxz">
+                                    <ul class="ul-listxz"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="choicedatebox">
+                    <div class="choicedate"><input class="choicedatein" style="text-indent:1em;" type="text" readonly="true" placeholder="请选择日期"><img src="img/icon_day.png"></div>
+                    <!--日期选择器-->
+                    <div class="choicetimes">
+                        <div class="choicetimes1"></div>
+                        <div class="choicetimes2"> </div>
+
+                    </div>
+
+                </div>
+                <div class="choicemessagebox">
+                    <div class="choicemessage"><input class="choicemessagein" style="text-indent:1em;" type="text" placeholder="酒店名称/位置/关键字"></div>
+                </div>
+            </div>
+            <!--搜索-->
+            <div class="search" style="display:none">
+                <div class="searchbutton"><button class="btn" type="button">搜索</button></div>
+            </div>
+        </div>
+    </div>
+</body>
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script src="js/index.js"></script>
+<script src="js/date.js"></script>
+
+</html>
