@@ -7,6 +7,9 @@ $(document).ready(function() {
     //一开始就加载的西安的酒店
     hotelist('1');
     window.addEventListener('scroll', _.throttle(lazyLoad(), 100));
+    window.addEventListener('scroll', _.throttle(lazyLoad1(), 100));
+    window.addEventListener('scroll', _.throttle(lazyLoad2(), 100));
+    window.addEventListener('scroll', _.throttle(lazyLoad3(), 100));
 
 });
 
@@ -395,7 +398,29 @@ function hotelist(page) {
                 str += '</a>'
                 str += '<div class="rightbox">'; //图片右边的盒子
                 str += '<span class="name">' + Dynamic[i].name + '</span>'; //酒店名字
-                str += '<span class="star">' + Dynamic[i].star_level + '</span><br>' //几个星星
+                // str += '<span class="star">' + Dynamic[i].star_level + '</span>' //几个星星
+                if (Dynamic[i].star_level == 3) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 4) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 5) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 2) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 1) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                }
+                // str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png"><img class="starimg4" src="img/icon_star.png"><img class="starimg5" src="img/icon_star.png">';
                 str += '<span class="address">' + Dynamic[i].address + '</span>'; //地址
                 str += '<div class="rightboxoverall">' //图片右边盒子里的盒子，分数，点评
                 str += '<span class="overall">' + Dynamic[i].overall_rating + '/5分</span><br>'; //几分
@@ -409,12 +434,29 @@ function hotelist(page) {
                 str += '</div>';
                 str += '</div>';
             }
+
+
+
             $(".dynamiclists").append(str);
 
-        })
+            $(function() {
+                //限制字符个数
+                $(".name").each(function() {
+                    var maxwidth = 7;
+                    if ($(this).text().length > maxwidth) {
+                        $(this).text($(this).text().substring(0, maxwidth));
+                        $(this).html($(this).html() + '');
+                    }
+                });
+            });
+
+        });
+
+
 }
+
 //关键字条件搜索
-function Hotel_lists(page) {
+function Hotel_lists(page, overallRating, price, distance) {
     let hotelKeyword = $(".choicemessagein").val();
     let cityName = $(".choicecityin").val();
     let number = getValue();
@@ -427,6 +469,11 @@ function Hotel_lists(page) {
         priceRange = '300, 600';
     } else if (number == '4') {
         priceRange = '600, 1000';
+    }
+    let a = $(".pricesin").val();
+    let b = $(".pricesinp").val();
+    if (a > 0 || b > 0) {
+        priceRange = '' + a + ',' + b + '';
     }
     let number1 = getValue1();
     let starLevel = '';
@@ -447,20 +494,10 @@ function Hotel_lists(page) {
         specialLevel = '客栈公寓';
     }
     let number3 = getValue3();
-    let brand = '';
-    if (number3 == '1') {
-        brand = '如家快捷'
-    } else if (number3 == '2') {
-        brand = '汉庭酒店';
-    } else if (number3 == '3') {
-        brand = '七天连锁';
-    } else if (number3 == '4') {
-        brand = '锦江之星'
-    } else if (number3 == '5') {
-        brand = '布丁';
-    } else if (number3 == '6') {
-        brand = '速8';
-    }
+    let brand = "";
+    brand = $("input:checkbox[name='brads']:checked").map(function(index, elem) {
+        return $(elem).val();
+    }).get().join(',');
 
     $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/hotel/list", {
             method: "get", // get请求
@@ -473,7 +510,11 @@ function Hotel_lists(page) {
                 priceRange: priceRange,
                 starLevel: starLevel,
                 specialLevel: specialLevel,
-                brand: brand
+                brand: brand,
+
+                overallRating: overallRating,
+                price: price,
+                distance: distance
             },
             xhrFields: {
                 withCredentials: true // 允许跨域名储存和访问cookie
@@ -492,7 +533,28 @@ function Hotel_lists(page) {
                 str += '</a>'
                 str += '<div class="rightbox">'; //图片右边的盒子
                 str += '<span class="name">' + Dynamic[i].name + '</span>'; //酒店名字
-                str += '<span class="star">' + Dynamic[i].star_level + '</span><br>' //几个星星
+                // str += '<span class="star">' + Dynamic[i].star_level + '</span><br>' //几个星星
+                if (Dynamic[i].star_level == 3) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 4) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 5) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 2) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                } else if (Dynamic[i].star_level == 1) {
+                    str += '<span class="strstar">';
+                    str += '<img class="starimg3" src="img/icon_star.png">';
+                    str += '</span>';
+                }
                 str += '<span class="address">' + Dynamic[i].address + '</span>'; //地址
                 str += '<div class="rightboxoverall">' //图片右边盒子里的盒子，分数，点评
                 str += '<span class="overall">' + Dynamic[i].overall_rating + '/5分</span><br>'; //几分
@@ -516,6 +578,30 @@ $(".btn").click(function() {
     $(".dynamiclists").hide();
     Hotel_lists('1');
     window.addEventListener('scroll', _.throttle(lazyLoad1(), 100));
+});
+//推荐
+$(".recommend1").click(function() {
+    $('.dynamiclists1').empty();
+    $(".dynamiclists").hide();
+    Hotel_lists('1', '', '', '');
+});
+//按照评价
+$(".recommend2").click(function() {
+    $('.dynamiclists1').empty();
+    $(".dynamiclists").hide();
+    Hotel_lists('1', '1', '', '');
+});
+//按照价格
+$(".recommend3").click(function() {
+    $('.dynamiclists1').empty();
+    $(".dynamiclists").hide();
+    Hotel_lists('1', '', '1', '');
+});
+//按照距离
+$(".recommend4").click(function() {
+    $('.dynamiclists1').empty();
+    $(".dynamiclists").hide();
+    Hotel_lists('1', '', '', '1');
 });
 
 function getValue() {
@@ -555,24 +641,6 @@ function getValue3() {
     }
 }
 
-//推荐一栏
-$(".recommend1").mouseenter(function() {
-    $(".recommend1").css("background-color", "#5944C3");
-    $(".recommend1").siblings().css("background-color", "");
-});
-$(".recommend2").mouseenter(function() {
-    $(".recommend2").css("background-color", "#5944C3");
-    $(".recommend2").siblings().css("background-color", "");
-});
-$(".recommend3").mouseenter(function() {
-    $(".recommend3").css("background-color", "#5944C3");
-    $(".recommend3").siblings().css("background-color", "");
-});
-$(".recommend4").mouseenter(function() {
-    $(".recommend4").css("background-color", "#5944C3");
-    $(".recommend4").siblings().css("background-color", "");
-});
-
 //懒加载
 //页面一打开整个西安的酒店
 function lazyLoad() {
@@ -580,7 +648,7 @@ function lazyLoad() {
     return function() {
         var loading = document.getElementById("loading");
         if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
-            hotelist(page++);
+            // hotelist(page++);
         }
     }
 }
@@ -590,7 +658,35 @@ function lazyLoad1() {
     return function() {
         var loading = document.getElementById("loading");
         if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
+            // Hotel_lists(page++, '', '', '');
             Hotel_lists(page++);
+
         }
     }
 }
+
+function lazyLoad2() {
+    var page = 2;
+    return function() {
+        var loading = document.getElementById("loading");
+        if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
+            Hotel_lists(page++, '', '', '');
+            // Hotel_lists(page++);
+        }
+    }
+}
+
+function lazyLoad3() {
+    var page = 2;
+    return function() {
+        var loading = document.getElementById("loading");
+        if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
+            Hotel_lists(page++, '', '1', '');
+            // Hotel_lists(page++);
+        }
+    }
+}
+//我的订单
+$(".span1").click(function() {
+    window.location.href = "Order_list.html"
+});

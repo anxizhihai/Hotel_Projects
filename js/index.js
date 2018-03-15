@@ -1,5 +1,7 @@
 $(document).ready(function() {
+    $(".arrowsul li").eq(0).css("border-color", "transparent transparent #5944C3 transparent");
     // getCaptchareceive();
+    hothotel("西安");
 
 });
 //添加城市
@@ -218,10 +220,6 @@ function getCaptchareceive() {
             });
         });
 }
-
-// $(document).on("click", "#ele", function() {
-//     //...
-// });
 $(".ul-listrm").on("click", "li ", function() {
     var Uarry = $(".ul-listrm li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
@@ -305,3 +303,109 @@ $(".navigation6").mouseenter(function() {
 // $(document).bind("click", function() {
 //     $('.ajaxcity').hide();
 // });
+//li的点击事件
+var element = $("ul li").eq(0);
+
+//首页加载的热门城市列表
+function hothotel(cityName) {
+    let img_url = "https://dev.apis.sh/P7G0PaMgO/static/";
+    $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/hotel/list", {
+            method: "get", // get请求
+            dataType: 'json', // 当服务器发来html元素时，需要如此设置，使ajax进行html解析
+            data: {
+                cityName: cityName,
+                limit: '8',
+                page: '1'
+            },
+            xhrFields: {
+                withCredentials: true // 允许跨域名储存和访问cookie
+            }
+        })
+        .done(function(data) { // 处理ajax成功的回调
+
+            if (data.code == "success") {
+                var hotel = data.data.hotelList;
+                var str = '';
+                for (var i = 0; i < hotel.length; i++) {
+                    str += '<div class="hotelslist" style="background:url(' + img_url + hotel[i].picture["0"] + '); height:220; width:220;">';
+                    str += '<div class="insideboxlist">';
+                    str += '<div>';
+                    str += '<span class="hotelnames">' + hotel[i].name + ' </span>';
+                    if (hotel[i].price >= 300) {
+                        str += '<span class="Deluxe">豪华型</span>';
+                    } else if (hotel[i].price < 300) {
+                        str += '<span class="Deluxe">高档型</span>';
+                    }
+                    str += '<div class="pricehotels"><span class="pricehotel">￥</span><span>' + hotel[i].price + '</span></div>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                }
+                $(".Dynamicl").html(str);
+                //限制字符个数
+                $(".hotelnames").each(function() {
+                    var maxwidth = 7;
+                    if ($(this).text().length > maxwidth) {
+                        $(this).text($(this).text().substring(0, maxwidth));
+                        $(this).html($(this).html() + '');
+                    }
+                });
+            } else {
+                var str1 = '';
+                str1 += '<div class="empt">暂无数据</div>';
+                $(".Dynamicl").html(str1);
+
+            }
+        })
+}
+$(".ulli li").eq(1).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(0).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(0).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+
+});
+$(".ulli li").eq(2).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(1).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(1).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(3).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(2).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(2).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(4).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(3).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(3).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(5).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(4).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(4).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(6).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(5).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(5).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(7).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(6).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(6).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(8).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(7).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(7).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(9).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(8).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(8).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});
+$(".ulli li").eq(10).bind('click', function() {
+    hothotel($(this).html());
+    $(".arrowsul li").eq(9).css("border-color", "transparent transparent #5944C3 transparent");
+    $(".arrowsul li").eq(9).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
+});

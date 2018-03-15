@@ -248,6 +248,11 @@ html {
     width: 81px;
     height: 36px;
     cursor: pointer;
+    font-family: .AppleSystemUIFont;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 14px;
 }
 
 .ajaxlist1 {
@@ -490,6 +495,7 @@ html {
     font-size: 14px;
     color: #FFFFFF;
     letter-spacing: 0;
+    cursor: pointer;
 }
 
 .choice_boxs1span3,
@@ -830,7 +836,14 @@ html {
 .prices1,
 .prices2,
 .prices3,
-.prices4,
+.prices4 {
+    display: inline-block;
+    width: 100px;
+    margin-left: 10px;
+}
+
+.prices1 {}
+
 .prices5 {
     display: inline-block;
     margin-right: 10px;
@@ -867,6 +880,7 @@ html {
     letter-spacing: 0;
     border: 1px solid #959595;
     margin-left: 30px;
+    cursor: pointer;
 }
 
 .starthree {
@@ -918,7 +932,7 @@ html {
 .recommend3,
 .recommend4 {
     display: inline-block;
-    width: 60px;
+    width: 80px;
     height: 40px;
     float: left;
     line-height: 40px;
@@ -951,6 +965,7 @@ html {
     height: 160px;
     float: left;
     margin-top: 20px;
+    margin-left: 5px;
     clear: both;
 }
 
@@ -971,17 +986,18 @@ html {
 }
 
 .rightboxoverall {
-    width: 80px;
+    width: 110px;
     height: 50px;
     font-family: HiraginoSansGB-W3;
     font-size: 14px;
     color: #3E3E3E;
     float: right;
     margin-top: -35px;
-    border-left: 1px solid rgba(0, 0, 0, 0.35);
-    border-right: 1px solid rgba(0, 0, 0, 0.35);
+    border-left: 1px dashed rgba(0, 0, 0, 0.35);
+    border-right: 1px dashed rgba(0, 0, 0, 0.35);
     border-top: none;
     border-bottom: none;
+    text-align: center;
 }
 
 .boxprice {
@@ -1005,7 +1021,6 @@ html {
 .address {
     display: inline-block;
     width: 194px;
-    height: 36px;
     font-family: PingFangSC-Regular;
     font-size: 13px;
     color: #3E3E3E;
@@ -1013,10 +1028,12 @@ html {
 }
 
 .price {
+    display: inline-block;
     font-family: PingFangSC-Semibold;
     font-size: 20px;
     color: #FB430A;
     padding-left: 30px;
+    margin-bottom: 10px;
 }
 
 .pricebutton {
@@ -1028,7 +1045,6 @@ html {
     width: 94px;
     height: 34px;
     text-align: center;
-    line-height: 34px;
     border: 1px solid #5944C3;
 }
 
@@ -1067,4 +1083,83 @@ html {
 .loadings {
     width: 100px;
     height: 60px;
+}
+
+.strstar {
+    display: inline-block;
+    width: 100px;
+}
+
+.pricess,
+.pricess1,
+.pricess2,
+.pricess3 {
+    position: absolute;
+    right: 9999px;
+}
+
+.starss {
+    position: absolute;
+    right: 9999px;
+}
+
+.brads1,
+.brads2,
+.brads3,
+.brads4,
+.brads5,
+.brads6 {
+    position: absolute;
+    right: 9999px;
+}
+
+.bradsimg1,
+.bradsimg2,
+.bradsimg3,
+.bradsimg4,
+.bradsimg5,
+.bradsimg6 {
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.starimgs1,
+.starimgs2,
+.starimgs3,
+.starimgs4 {
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.starimgs11,
+.starimgs12 {
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.img1,
+.img2,
+.img3,
+.img4 {
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.recommend22,
+.recommend32,
+.recommend42 {
+    float: right;
+    margin-top: 13px;
+    margin-right: 10px;
+}
+
+.re1,
+.re2,
+.re3 {
+    display: inline-block;
+    margin-left: 20px;
 }
