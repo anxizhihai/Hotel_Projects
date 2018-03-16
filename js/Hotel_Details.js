@@ -1,17 +1,3 @@
-//封装取传递过来的id函数
-function getQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    var q = window.location.pathname.substr(1).match(reg_rewrite);
-    if (r != null) {
-        return unescape(r[2]);
-    } else if (q != null) {
-        return unescape(q[2]);
-    } else {
-        return null;
-    }
-}
 $(document).ready(function() {
     hoteldetail();
     comment(1, 'all');
@@ -19,8 +5,56 @@ $(document).ready(function() {
     $(".User_evaluation3").css("color", "#FFFFFF");
     $(".room1").css("background", "#5944C3");
     $(".room1").css("color", "#FFFFFF");
-    hotelroom();
-
+    hotelroom('');
+    //引入日历插件
+    laydate.render({
+        elem: '#queryinput1',
+        format: 'yyyy/MM/dd',
+        min: 0,
+        max: 60,
+        done: function(value, date, endDate) {
+            var times = $(".queryinput1").val();
+            var str12 = times.split('/');
+            console.log(str12["0"]);
+            console.log(str12["1"]);
+            console.log(str12["2"])
+            var year = str12["0"],
+                month = str12["1"] - 1,
+                date = str12["2"]; // month=6表示7月
+            var dt = new Date(year, month, date);
+            var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            // alert(weekDay[dt.getDay()]);
+            $(".firsttime1").html(weekDay[dt.getDay()]);
+        }
+    });
+    laydate.render({
+        elem: '#queryinput2',
+        format: 'yyyy/MM/dd',
+        min: 1,
+        max: 60,
+        done: function(value, date, endDate) {
+            var times1 = $(".queryinput1").val();
+            var times2 = $(".queryinput2").val();
+            var date1 = new Date(times1);
+            var date2 = new Date(times2);
+            var date3 = date2.getTime() - date1.getTime(); //时间差的毫秒数
+            var days = Math.floor(date3 / (24 * 3600 * 1000));
+            console.log(days);
+            $(".alldates").html(days);
+            var timess = $(".queryinput2").val();
+            var str13 = timess.split('/');
+            console.log(str13["0"]);
+            console.log(str13["1"]);
+            console.log(str13["2"])
+            var year = str13["0"],
+                month = str13["1"] - 1,
+                date = str13["2"]; // month=6表示7月
+            var dt = new Date(year, month, date);
+            var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            // alert(weekDay[dt.getDay()]);
+            $(".secondtime1").html(weekDay[dt.getDay()]);
+        }
+    });
 });
 
 
@@ -243,9 +277,12 @@ $(".room4").click(function() {
 
 //酒店房间列表
 
-function hotelroom() {
+function hotelroom(checkTime) {
+    var times1 = $(".queryinput1").val();
+    var times2 = $(".queryinput2").val();
+    var week1 = $(".firsttime1").html();
+    var week2 = $(".secondtime1").html();
     let hotelId = getQueryString("hotel_id");
-    let checkTime = '';
     $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/hotel/room", {
             method: "get", // get请求
             dataType: 'json', // 当服务器发来html元素时，需要如此设置，使ajax进行html解析
@@ -259,29 +296,93 @@ function hotelroom() {
         })
         .done(function(data) {
             // 处理ajax成功的回调
-            var hotelrooms = data.data.roomList;
-            var str = '';
-            for (var i = 0; i < hotelrooms.length; i++) {
-                str += '<div class="deluxe_king">'
-                str += '<span class="deluxe_king1">' + hotelrooms[i].name + '</span>';
-                str += '<span class="deluxe_king2">' + hotelrooms[i].bedType + '</span>';
-                str += '<span class="deluxe_king3">' + hotelrooms[i].area + '</span>';
-                str += '<span>M²</span>';
-                str += '<span class="deluxe_king4">' + hotelrooms[i].wayOfInternet + '</span>';
-                str += '<span class="deluxe_king5">' + hotelrooms[i].breakfast + '</span>';
-                str += '<span class="deluxe_king6">' + hotelrooms[i].window + '</span>';
-                str += '<span class="deluxe_king7">' + hotelrooms[i].cancelOfRules + '</span>';
-
-                str += '<span class="deluxe_king8"><span>¥</span>' + hotelrooms[i].price + '</span>';
-                str += '<a target = "_blank" href="predetermine.html?name=' + hotelrooms[i].name + '&type=' + hotelrooms[i].bedType + '&area=' + hotelrooms[i].area + '&wifi=' + hotelrooms[i].wayOfInternet + '&price=' + hotelrooms[i].price + '&breakfast=' + hotelrooms[i].breakfast + '&hotelname=' + hotels + '&addressone=' + addressone + '&iphonesone=' + iphonesone + '&imgs=' + imgs + '&hotelid=' + hotelId + '">';
-                str += '<button type="button" class="deluxe_king9">预定</button>';
-                str += '</a>';
-                str += '</div>'
+            if (data.code == "success") {
+                var hotelrooms = data.data.roomList;
+                var str = '';
+                for (var i = 0; i < hotelrooms.length; i++) {
+                    str += '<div class="deluxe_king">'
+                    str += '<span class="deluxe_king1">' + hotelrooms[i].name + '</span>';
+                    str += '<span class="deluxe_king2">' + hotelrooms[i].bedType + '</span>';
+                    str += '<span class="deluxe_king3">' + hotelrooms[i].area + '</span>';
+                    str += '<span>M²</span>';
+                    str += '<span class="deluxe_king4">' + hotelrooms[i].wayOfInternet + '</span>';
+                    str += '<span class="deluxe_king5">' + hotelrooms[i].breakfast + '</span>';
+                    str += '<span class="deluxe_king6">' + hotelrooms[i].window + '</span>';
+                    str += '<span class="deluxe_king7">' + hotelrooms[i].cancelOfRules + '</span>';
+                    str += '<span class="deluxe_king8"><span>¥</span>' + hotelrooms[i].price + '</span>';
+                    str += '<a target = "_blank" href="predetermine.html?name=' + hotelrooms[i].name + '&type=' + hotelrooms[i].bedType + '&area=' + hotelrooms[i].area + '&wifi=' + hotelrooms[i].wayOfInternet + '&price=' + hotelrooms[i].price + '&breakfast=' + hotelrooms[i].breakfast + '&hotelname=' + hotels + '&addressone=' + addressone + '&iphonesone=' + iphonesone + '&imgs=' + imgs + '&hotelid=' + hotelId + '&times1=' + times1 + '&times2=' + times2 + '&week1=' + week1 + '&week2=' + week2 + '">';
+                    str += '<button type="button" class="deluxe_king9">预定</button>';
+                    str += '</a>';
+                    str += '</div>'
+                }
+                $(".house").append(str);
+            } else if (data.code == "param_incomplete") {
+                alert("请求参数不完整");
+            } else if (data.code == "param_error") {
+                alert("入住时间不能比当前时间早");
+            } else if (data.code == "database_error") {
+                alert("服务器或数据库内部错误");
             }
-            $(".house").append(str);
+
         })
 }
+
+// $("#queryinput2").bind("input propertychange", function() {
+//     var times1 = $(".queryinput1").val();
+//     var times2 = $(".queryinput2").val();
+//     var date1 = new Date(times1);
+//     var date2 = new Date(times2);
+//     var date3 = date2.getTime() - date1.getTime(); //时间差的毫秒数
+//     var days = Math.floor(date3 / (24 * 3600 * 1000));
+//     console.log(days);
+//     $(".alldates").html(days);
+// });
+
+// $(".queryinput2").bind(function() {
+//         var times1 = $(".queryinput1").val();
+//         var times2 = $(".queryinput2").val();
+//         console.log("-----------");
+//         console.log(times1);
+//         console.log(times2);
+//         console.log("-------------")
+//         var date1 = new Date(times1);
+//         var date2 = new Date(times2);
+//         var date3 = date2.getTime() - date1.getTime(); //时间差的毫秒数
+//         var days = Math.floor(date3 / (24 * 3600 * 1000));
+//         console.log(days);
+//         $(".alldates").html(days);
+
+//     })
 //点击查询酒店房间列表
 $(".btnquery").click(function() {
-    hotelroom();
-})
+    $('.house').empty();
+    var times1 = $(".queryinput1").val();
+    var times2 = $(".queryinput2").val();
+    var date1 = new Date(times1);
+    var date2 = new Date(times2);
+    var ti1 = date1.getTime();
+    var ti2 = date2.getTime();
+    let checkTime = '' + ti1 + ',' + ti2 + '';
+    console.log(ti1);
+    console.log(ti2);
+    hotelroom(checkTime);
+
+});
+//我的订单
+$(".span1").click(function() {
+    window.location.href = "Order_list.html"
+});
+//封装取传递过来的id函数
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    var q = window.location.pathname.substr(1).match(reg_rewrite);
+    if (r != null) {
+        return unescape(r[2]);
+    } else if (q != null) {
+        return unescape(q[2]);
+    } else {
+        return null;
+    }
+}

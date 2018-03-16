@@ -131,3 +131,7 @@ function changepasswords() {
             alert(data.message) // 提示用户
         })
 }
+//我的订单
+$(".span1").click(function() {
+    window.location.href = "Order_list.html"
+});

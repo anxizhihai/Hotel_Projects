@@ -12,8 +12,6 @@ $(document).ready(function() {
     });
 });
 
-
-
 function getCaptcha() {
     $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/img/captcha", {
             method: "get", // get请求

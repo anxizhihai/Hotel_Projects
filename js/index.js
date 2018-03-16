@@ -1,12 +1,22 @@
 $(document).ready(function() {
     $(".arrowsul li").eq(0).css("border-color", "transparent transparent #5944C3 transparent");
-    // getCaptchareceive();
+    getCaptchareceive();
     hothotel("西安");
+    //引入日历插件
+    laydate.render({
+        elem: '#choicedatein',
+        range: '~', //或 range: '~' 来自定义分割字符
+        format: 'yyyy/MM/dd',
+        done: function(value, date, endDate) {
+            console.log(value); //得到日期生成的值，如：2017-08-18
+            console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+            console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+        }
+    });
 
 });
 //添加城市
 function getCaptchareceive() {
-
     $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/city/list", {
             method: "get", // get请求
             dataType: 'json', // 当服务器发来html元素时，需要如此设置，使ajax进行html解析
@@ -45,7 +55,6 @@ function getCaptchareceive() {
                 str3 += '<li class="li-list">' + abcdef3[i].cityName + '</li>';
             }
             $(".ul-list").append(str3);
-
             var str4 = "";
             for (var i = 0; i < abcdef4.length; i++) {
                 str4 += '<li class="li-list">' + abcdef4[i].cityName + '</li>';
@@ -306,6 +315,7 @@ $(".navigation6").mouseenter(function() {
 //li的点击事件
 var element = $("ul li").eq(0);
 
+
 //首页加载的热门城市列表
 function hothotel(cityName) {
     let img_url = "https://dev.apis.sh/P7G0PaMgO/static/";
@@ -327,6 +337,7 @@ function hothotel(cityName) {
                 var hotel = data.data.hotelList;
                 var str = '';
                 for (var i = 0; i < hotel.length; i++) {
+                    str += '<a target = "_blank" href="Hotel_Details.html?hotel_id=' + hotel[i]._id + '">';
                     str += '<div class="hotelslist" style="background:url(' + img_url + hotel[i].picture["0"] + '); height:220; width:220;">';
                     str += '<div class="insideboxlist">';
                     str += '<div>';
@@ -340,6 +351,7 @@ function hothotel(cityName) {
                     str += '</div>';
                     str += '</div>';
                     str += '</div>';
+                    str += '</a>';
                 }
                 $(".Dynamicl").html(str);
                 //限制字符个数
@@ -356,6 +368,8 @@ function hothotel(cityName) {
                 $(".Dynamicl").html(str1);
 
             }
+
+
         })
 }
 $(".ulli li").eq(1).bind('click', function() {
@@ -409,3 +423,16 @@ $(".ulli li").eq(10).bind('click', function() {
     $(".arrowsul li").eq(9).css("border-color", "transparent transparent #5944C3 transparent");
     $(".arrowsul li").eq(9).siblings().css("border-color", "transparent transparent #FFFFFF transparent");
 });
+
+
+// var strbtn = '';
+// strbtn += '<a target = "_blank" href="Hotel_screening.html?ainput=' + ainput + '&dates=' + adates + '&aimport=' + aimport + '">';
+// strbtn += '<button class="btn" type="button">搜索</button>';
+// strbtn += '</a>';
+// $(".search").append(strbtn);
+$(".btn").click(function() {
+    var ainput = $(".choicecityin").val();
+    var adates = $(".choicedatein").val();
+    var aimport = $(".choicemessagein").val();
+    window.location.href = "Hotel_screening.html?ainput=" + ainput + "&dates=" + adates + "&aimport=" + aimport + "";
+})

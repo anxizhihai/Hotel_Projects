@@ -425,12 +425,12 @@
 
 .deluxe_king1 {
     display: inline-block;
+    width: 110px;
     font-family: HiraginoSansGB-W6;
     font-size: 14px;
     color: #3E3E3E;
     letter-spacing: 0;
     line-height: 43px;
-    width: 92px;
 }
 
 .deluxe_king1,
@@ -443,12 +443,12 @@
 
 .deluxe_king2 {
     display: inline-block;
+    width: 140px;
     font-family: HiraginoSansGB-W3;
     font-size: 14px;
     color: #3E3E3E;
     letter-spacing: 0;
-    margin-left: 59px;
-    width: 98px;
+    margin-left: 25px;
 }
 
 .deluxe_king3,
@@ -456,11 +456,13 @@
 .bed_room3,
 .Standard_Room3,
 .standard_room3 {
+    display: inline-block;
+    width: 20px;
     font-family: HiraginoSansGB-W3;
     font-size: 14px;
     color: #3E3E3E;
     letter-spacing: 0;
-    margin-left: 39px;
+    margin-left: 1px;
 }
 
 .deluxe_king4,
@@ -468,11 +470,13 @@
 .bed_room4,
 .Standard_Room4,
 .standard_room4 {
+    display: inline-block;
+    width: 62px;
     font-family: HiraginoSansGB-W3;
     font-size: 14px;
     color: #3E3E3E;
     letter-spacing: 0;
-    margin-left: 70px;
+    margin-left: 50px;
 }
 
 .deluxe_king5,
@@ -480,6 +484,8 @@
 .bed_room5,
 .Standard_Room5,
 .standard_room5 {
+    display: inline-block;
+    width: 28px;
     font-family: HiraginoSansGB-W3;
     font-size: 14px;
     color: #3E3E3E;
@@ -492,11 +498,13 @@
 .bed_room6,
 .Standard_Room6,
 .standard_room6 {
+    display: inline-block;
+    width: 50px;
     font-family: HiraginoSansGB-W3;
     font-size: 14px;
     color: #3E3E3E;
     letter-spacing: 0;
-    margin-left: 49px;
+    margin-left: 60px;
 }
 
 .deluxe_king7,
@@ -504,11 +512,13 @@
 .bed_room7,
 .Standard_Room7,
 .standard_room7 {
+    display: inline-block;
+    width: 60px;
     font-family: HiraginoSansGB-W3;
     font-size: 14px;
     color: #3E3E3E;
     letter-spacing: 0;
-    margin-left: 50px;
+    margin-left: 25px;
 }
 
 .deluxe_king8,
@@ -516,11 +526,13 @@
 .bed_room8,
 .Standard_Room8,
 .standard_room8 {
+    display: inline-block;
+    width: 60px;
     font-family: HiraginoSansGB-W6;
     font-size: 18px;
     color: #FB430A;
     letter-spacing: 0;
-    margin-left: 55.7px;
+    margin-left: 50px;
 }
 
 .deluxe_king9,
@@ -914,4 +926,44 @@
     line-height: 60px;
     text-align: center;
     cursor: pointer;
+}
+
+.firsttime {
+    position: relative;
+}
+
+.firsttime1 {
+    position: absolute;
+    left: 150px;
+    top: 3px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #3E3E3E;
+    letter-spacing: 0;
+}
+
+.firsttime2 {
+    position: absolute;
+    left: 200px;
+    top: 3px;
+}
+
+.secondtime {
+    position: relative;
+}
+
+.secondtime1 {
+    position: absolute;
+    left: 150px;
+    top: 3px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #3E3E3E;
+    letter-spacing: 0;
+}
+
+.secondtime2 {
+    position: absolute;
+    left: 200px;
+    top: 3px;
 }

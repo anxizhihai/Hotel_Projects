@@ -1,19 +1,41 @@
 $(document).ready(function() {
+    //引入日历插件
+    laydate.render({
+        elem: '#choicedatein',
+        range: '~', //或 range: '~' 来自定义分割字符
+        format: 'yyyy/MM/dd',
+        done: function(value, date, endDate) {
+            console.log(value); //得到日期生成的值，如：2017-08-18
+            console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+            console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+        }
+    });
+
     //调用添加城市函数
     getCaptchareceive();
+    var a = GetUrlByParamName("ainput");
+    console.log(a);
+    var b = GetUrlByParamName("dates");
+    console.log(b);
+    var c = GetUrlByParamName("aimport");
+    //从上个页面传递过来的默认关键字
+    $(".choicemessagein").val(c);
+    //从上边传递过来的默认时间
+    $(".choicedatein").val(b);
     //默认设定城市为西安
-    $(".choicecityin").val("西安");
+    $(".choicecityin").val(a);
     $(".recommend1").css("background-color", "#5944C3");
     //一开始就加载的西安的酒店
     hotelist('1');
     window.addEventListener('scroll', _.throttle(lazyLoad(), 100));
     window.addEventListener('scroll', _.throttle(lazyLoad1(), 100));
-    window.addEventListener('scroll', _.throttle(lazyLoad2(), 100));
-    window.addEventListener('scroll', _.throttle(lazyLoad3(), 100));
+    // window.addEventListener('scroll', _.throttle(lazyLoad2(), 100));
+    // window.addEventListener('scroll', _.throttle(lazyLoad3(), 100));
 
 });
 
 //行政
+var i = 0;
 $(".choice_boxs1span3").click(function() {
     $(".district").toggle();
     $(".Business_Circles").hide();
@@ -22,8 +44,19 @@ $(".choice_boxs1span3").click(function() {
     $(".Scenic").hide();
     $(".districtul li").remove();
     getCaptcha();
+    i++;
+    if (i % 2 == 1) {
+        $(".aimgs").css("transform", "rotate(180deg)");
+        $(".aimgs").css("transition", "transform 2s");
+    } else {
+        $(".aimgs").css("transform", "");
+        $(".aimgs").css("transition", "transform 2s");
+    }
+
+
 });
 //商圈
+var j = 0
 $(".choice_boxs1span4").click(function() {
     $(".Business_Circles").toggle();
     $(".district").hide();
@@ -32,14 +65,31 @@ $(".choice_boxs1span4").click(function() {
     $(".Scenic").hide();
     $(".Business_Circlesul li").remove();
     Business();
+    j++;
+    if (j % 2 == 1) {
+        $(".aimgs1").css("transform", "rotate(180deg)");
+        $(".aimgs1").css("transition", "transform 2s");
+    } else {
+        $(".aimgs1").css("transform", "rotate(360deg)");
+        $(".aimgs1").css("transition", "transform 2s");
+    }
 });
 //地铁站
+var h = 0;
 $(".choice_boxs1span5").click(function() {
     $(".Metro_Station").toggle();
     $(".Business_Circles").hide();
     $(".district").hide();
     $(".Station").hide();
     $(".Scenic").hide();
+    h++;
+    if (h % 2 == 1) {
+        $(".aimgs2").css("transform", "rotate(180deg)");
+        $(".aimgs2").css("transition", "transform 2s");
+    } else {
+        $(".aimgs2").css("transform", "rotate(360deg)");
+        $(".aimgs2").css("transition", "transform 2s");
+    }
 });
 $(".Line_number1").click(function() {
     $(".Metro_Stationul2").hide();
@@ -65,6 +115,7 @@ $(".Line_number3").click(function() {
     Metro();
 });
 //车站
+var f = 0;
 $(".choice_boxs1span6").click(function() {
     $(".Station").toggle();
     $(".Business_Circles").hide();
@@ -75,8 +126,17 @@ $(".choice_boxs1span6").click(function() {
     $(".Stationul2 li").remove();
     $(".Stationul3 li").remove();
     Station();
+    f++;
+    if (f % 2 == 1) {
+        $(".aimgs3").css("transform", "rotate(180deg)");
+        $(".aimgs3").css("transition", "transform 2s");
+    } else {
+        $(".aimgs3").css("transform", "rotate(360deg)");
+        $(".aimgs3").css("transition", "transform 2s");
+    }
 });
 //景点
+var z = 0;
 $(".choice_boxs1span7").click(function() {
     $(".Scenic").toggle();
     $(".Business_Circles").hide();
@@ -85,6 +145,14 @@ $(".choice_boxs1span7").click(function() {
     $(".district").hide();
     $(".Scenic_ul li").remove();
     Scenic();
+    z++;
+    if (z % 2 == 1) {
+        $(".aimgs4").css("transform", "rotate(180deg)");
+        $(".aimgs4").css("transition", "transform 2s");
+    } else {
+        $(".aimgs4").css("transform", "");
+        $(".aimgs4").css("transition", "transform 2s");
+    }
 })
 
 //行政圈
@@ -181,7 +249,7 @@ function Metro() {
         .done(function(data) {
             // 处理ajax成功的回调 1号线
             var station = data.data.subway["地铁1号线"];
-            console.log(station);
+
             var str = "";
             for (var i = 0; i < station.length; i++) {
                 str += '<li class="Metro_Stationli">' + station[i] + '</li>';
@@ -434,11 +502,7 @@ function hotelist(page) {
                 str += '</div>';
                 str += '</div>';
             }
-
-
-
             $(".dynamiclists").append(str);
-
             $(function() {
                 //限制字符个数
                 $(".name").each(function() {
@@ -449,10 +513,7 @@ function hotelist(page) {
                     }
                 });
             });
-
         });
-
-
 }
 
 //关键字条件搜索
@@ -498,7 +559,13 @@ function Hotel_lists(page, overallRating, price, distance) {
     brand = $("input:checkbox[name='brads']:checked").map(function(index, elem) {
         return $(elem).val();
     }).get().join(',');
-
+    var times = $(".choicedatein").val();
+    var str12 = times.split('~');
+    var date1 = new Date(str12["0"]);
+    var date2 = new Date(str12["1"]);
+    var ti1 = date1.getTime();
+    var ti2 = date2.getTime();
+    let checkTime = '' + ti1 + ',' + ti2 + '';
     $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/hotel/list", {
             method: "get", // get请求
             dataType: 'json', // 当服务器发来html元素时，需要如此设置，使ajax进行html解析
@@ -506,12 +573,12 @@ function Hotel_lists(page, overallRating, price, distance) {
                 cityName: cityName,
                 limit: '5',
                 page: page,
+                checkTime: checkTime,
                 hotelKeyword: hotelKeyword,
                 priceRange: priceRange,
                 starLevel: starLevel,
                 specialLevel: specialLevel,
                 brand: brand,
-
                 overallRating: overallRating,
                 price: price,
                 distance: distance
@@ -522,55 +589,59 @@ function Hotel_lists(page, overallRating, price, distance) {
         })
         .done(function(data) {
             // 处理ajax成功的回调
-            let img_url = "https://dev.apis.sh/P7G0PaMgO/static/";
-            var Dynamic = data.data.hotelList;
-            var str = "";
-            for (var i = 0; i < Dynamic.length; i++) {
-                str += '<div class="divbox">';
-                str += '<div class="divinside">';
-                str += '<a target = "_blank" href="Hotel_Details.html?hotel_id=' + Dynamic[i]._id + '">'
-                str += '<img class="picture" src="' + img_url + Dynamic[i].picture['0'] + '">';
-                str += '</a>'
-                str += '<div class="rightbox">'; //图片右边的盒子
-                str += '<span class="name">' + Dynamic[i].name + '</span>'; //酒店名字
-                // str += '<span class="star">' + Dynamic[i].star_level + '</span><br>' //几个星星
-                if (Dynamic[i].star_level == 3) {
-                    str += '<span class="strstar">';
-                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
-                    str += '</span>';
-                } else if (Dynamic[i].star_level == 4) {
-                    str += '<span class="strstar">';
-                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
-                    str += '</span>';
-                } else if (Dynamic[i].star_level == 5) {
-                    str += '<span class="strstar">';
-                    str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
-                    str += '</span>';
-                } else if (Dynamic[i].star_level == 2) {
-                    str += '<span class="strstar">';
-                    str += '<img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
-                    str += '</span>';
-                } else if (Dynamic[i].star_level == 1) {
-                    str += '<span class="strstar">';
-                    str += '<img class="starimg3" src="img/icon_star.png">';
-                    str += '</span>';
+            if (data.code == "success") {
+                let img_url = "https://dev.apis.sh/P7G0PaMgO/static/";
+                var Dynamic = data.data.hotelList;
+                var str = "";
+                for (var i = 0; i < Dynamic.length; i++) {
+                    str += '<div class="divbox">';
+                    str += '<div class="divinside">';
+                    str += '<a target = "_blank" href="Hotel_Details.html?hotel_id=' + Dynamic[i]._id + '">'
+                    str += '<img class="picture" src="' + img_url + Dynamic[i].picture['0'] + '">';
+                    str += '</a>'
+                    str += '<div class="rightbox">'; //图片右边的盒子
+                    str += '<span class="name">' + Dynamic[i].name + '</span>'; //酒店名字
+                    // str += '<span class="star">' + Dynamic[i].star_level + '</span><br>' //几个星星
+                    if (Dynamic[i].star_level == 3) {
+                        str += '<span class="strstar">';
+                        str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                        str += '</span>';
+                    } else if (Dynamic[i].star_level == 4) {
+                        str += '<span class="strstar">';
+                        str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                        str += '</span>';
+                    } else if (Dynamic[i].star_level == 5) {
+                        str += '<span class="strstar">';
+                        str += '<img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg1" src="img/icon_star.png"><img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                        str += '</span>';
+                    } else if (Dynamic[i].star_level == 2) {
+                        str += '<span class="strstar">';
+                        str += '<img class="starimg2" src="img/icon_star.png"><img class="starimg3" src="img/icon_star.png">';
+                        str += '</span>';
+                    } else if (Dynamic[i].star_level == 1) {
+                        str += '<span class="strstar">';
+                        str += '<img class="starimg3" src="img/icon_star.png">';
+                        str += '</span>';
+                    }
+                    str += '<span class="address">' + Dynamic[i].address + '</span>'; //地址
+                    str += '<div class="rightboxoverall">' //图片右边盒子里的盒子，分数，点评
+                    str += '<span class="overall">' + Dynamic[i].overall_rating + '/5分</span><br>'; //几分
+                    str += '<span class="comment">' + Dynamic[i].comment_num + '次点评</span>'; //评论次数
+                    str += '</div>';
+                    str += '</div>';
+                    str += '<div class="boxprice">' //价格，详情
+                    str += '<span class="price">￥' + Dynamic[i].price + '起</span>'
+                    str += '<button type="button" class="pricebutton">查看详情</button>'
+                    str += '</div>'
+                    str += '</div>';
+                    str += '</div>';
                 }
-                str += '<span class="address">' + Dynamic[i].address + '</span>'; //地址
-                str += '<div class="rightboxoverall">' //图片右边盒子里的盒子，分数，点评
-                str += '<span class="overall">' + Dynamic[i].overall_rating + '/5分</span><br>'; //几分
-                str += '<span class="comment">' + Dynamic[i].comment_num + '次点评</span>'; //评论次数
-                str += '</div>';
-                str += '</div>';
-                str += '<div class="boxprice">' //价格，详情
-                str += '<span class="price">￥' + Dynamic[i].price + '起</span>'
-                str += '<button type="button" class="pricebutton">查看详情</button>'
-                str += '</div>'
-                str += '</div>';
-                str += '</div>';
+                $(".dynamiclists1").append(str);
+            } else if (data.code == "hotel_not_found") {
+                $(".loading").html("别拉了，我可是是有底线的哦");
             }
-            $(".dynamiclists1").append(str);
-
         });
+
 }
 //搜索按钮
 $(".btn").click(function() {
@@ -578,7 +649,11 @@ $(".btn").click(function() {
     $(".dynamiclists").hide();
     Hotel_lists('1');
     window.addEventListener('scroll', _.throttle(lazyLoad1(), 100));
+
 });
+var va1;
+var va2;
+var va3;
 //推荐
 $(".recommend1").click(function() {
     $('.dynamiclists1').empty();
@@ -589,18 +664,27 @@ $(".recommend1").click(function() {
 $(".recommend2").click(function() {
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
+    va1 = 1;
+    va2 = '';
+    va3 = '';
     Hotel_lists('1', '1', '', '');
 });
 //按照价格
 $(".recommend3").click(function() {
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
+    va1 = '';
+    va2 = 1;
+    va3 = '';
     Hotel_lists('1', '', '1', '');
 });
 //按照距离
 $(".recommend4").click(function() {
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
+    va1 = '';
+    va2 = '';
+    va3 = 1;
     Hotel_lists('1', '', '', '1');
 });
 
@@ -653,40 +737,289 @@ function lazyLoad() {
     }
 }
 //懒加载
+//搜索,推荐懒加载
 function lazyLoad1() {
     var page = 2;
     return function() {
         var loading = document.getElementById("loading");
         if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
             // Hotel_lists(page++, '', '', '');
-            Hotel_lists(page++);
-
+            Hotel_lists(page++, va1, va2, va3);
         }
     }
 }
 
-function lazyLoad2() {
-    var page = 2;
-    return function() {
-        var loading = document.getElementById("loading");
-        if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
-            Hotel_lists(page++, '', '', '');
-            // Hotel_lists(page++);
-        }
-    }
-}
-
-function lazyLoad3() {
-    var page = 2;
-    return function() {
-        var loading = document.getElementById("loading");
-        if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
-            Hotel_lists(page++, '', '1', '');
-            // Hotel_lists(page++);
-        }
-    }
-}
 //我的订单
 $(".span1").click(function() {
     window.location.href = "Order_list.html"
 });
+//添加城市
+function getCaptchareceive() {
+
+    $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/city/list", {
+            method: "get", // get请求
+            dataType: 'json', // 当服务器发来html元素时，需要如此设置，使ajax进行html解析
+            xhrFields: {
+                withCredentials: true // 允许跨域名储存和访问cookie
+            }
+        })
+        .done(function(data) { // 处理ajax成功的回调
+
+            //热门城市
+            var list = data.data.hot;
+            var str = "";
+            for (var i = 0; i < list.length; i++) {
+                str += '<li class="li-list0" >' + list[i].cityName + '</li>';
+            }
+            $(".ul-listrm").append(str);
+            //abcdef
+            var abcdef1 = data.data.cityList.a;
+            var abcdef2 = data.data.cityList.b;
+            var abcdef3 = data.data.cityList.c;
+            var abcdef4 = data.data.cityList.d;
+            var abcdef5 = data.data.cityList.e;
+            var abcdef6 = data.data.cityList.f;
+            var str1 = "";
+            for (var i = 0; i < abcdef1.length; i++) {
+                str1 += '<li class="li-list" id="li-list">' + abcdef1[i].cityName + '</li>';
+            }
+            $(".ul-list").append(str1);
+            var str2 = "";
+            for (var i = 0; i < abcdef2.length; i++) {
+                str2 += '<li class="li-list">' + abcdef2[i].cityName + '</li>';
+            }
+            $(".ul-list").append(str2);
+            var str3 = "";
+            for (var i = 0; i < abcdef3.length; i++) {
+                str3 += '<li class="li-list">' + abcdef3[i].cityName + '</li>';
+            }
+            $(".ul-list").append(str3);
+
+            var str4 = "";
+            for (var i = 0; i < abcdef4.length; i++) {
+                str4 += '<li class="li-list">' + abcdef4[i].cityName + '</li>';
+            }
+            $(".ul-list").append(str4);
+            var str5 = "";
+            for (var i = 0; i < abcdef5.length; i++) {
+                str5 += '<li class="li-list">' + abcdef5[i].cityName + '</li>';
+            }
+            $(".ul-list").append(str5);
+            var str6 = "";
+            for (var i = 0; i < abcdef6.length; i++) {
+                str6 += '<li class="li-list">' + abcdef6[i].cityName + '</li>';
+            }
+            $(".ul-list").append(str6);
+
+            $(function() {
+                //限制字符个数
+                $(".li-list").each(function() {
+                    var maxwidth = 3;
+                    if ($(this).text().length > maxwidth) {
+                        $(this).text($(this).text().substring(0, maxwidth));
+                        $(this).html($(this).html() + '…');
+                    }
+                });
+            });
+
+            //ghjk
+            var ghjk1 = data.data.cityList.g;
+            var ghjk2 = data.data.cityList.h;
+            var ghjk3 = data.data.cityList.j;
+            var ghjk4 = data.data.cityList.k;
+
+            var gh1 = ""
+            for (var i = 0; i < ghjk1.length; i++) {
+                gh1 += '<li class="li-list1">' + ghjk1[i].cityName + ' </li>';
+            }
+            $(".ul-listgk").append(gh1);
+
+            var gh2 = ""
+            for (var i = 0; i < ghjk2.length; i++) {
+                gh2 += '<li class="li-list1">' + ghjk2[i].cityName + ' </li>';
+            }
+            $(".ul-listgk").append(gh2);
+
+            var gh3 = ""
+            for (var i = 0; i < ghjk3.length; i++) {
+                gh3 += '<li class="li-list1">' + ghjk3[i].cityName + ' </li>';
+            }
+            $(".ul-listgk").append(gh3);
+            var gh4 = ""
+            for (var i = 0; i < ghjk4.length; i++) {
+                gh4 += '<li class="li-list1">' + ghjk4[i].cityName + ' </li>';
+            }
+            $(".ul-listgk").append(gh4);
+
+            $(function() {
+                //限制字符个数
+                $(".li-list1").each(function() {
+                    var maxwidth = 3;
+                    if ($(this).text().length > maxwidth) {
+                        $(this).text($(this).text().substring(0, maxwidth));
+                        $(this).html($(this).html() + '…');
+                    }
+                });
+            });
+            //lmnpq
+            var lmnpq1 = data.data.cityList.l;
+            var lmnpq2 = data.data.cityList.m;
+            var lmnpq3 = data.data.cityList.n;
+            var lmnpq4 = data.data.cityList.p;
+            var lmnpq5 = data.data.cityList.q;
+
+            var lnm1 = "";
+            for (var i = 0; i < lmnpq1.length; i++) {
+                lnm1 += '<li class="li-list2">' + lmnpq1[i].cityName + '</li>';
+            }
+            $(".ul-listlq").append(lnm1);
+            var lnm2 = "";
+            for (var i = 0; i < lmnpq2.length; i++) {
+                lnm2 += '<li class="li-list2">' + lmnpq2[i].cityName + '</li>';
+            }
+            $(".ul-listlq").append(lnm2);
+            var lnm3 = "";
+            for (var i = 0; i < lmnpq3.length; i++) {
+                lnm3 += '<li class="li-list2">' + lmnpq3[i].cityName + '</li>';
+            }
+            $(".ul-listlq").append(lnm3);
+            var lnm4 = "";
+            for (var i = 0; i < lmnpq4.length; i++) {
+                lnm4 += '<li class="li-list2">' + lmnpq4[i].cityName + '</li>';
+            }
+            $(".ul-listlq").append(lnm4);
+            var lnm5 = "";
+            for (var i = 0; i < lmnpq5.length; i++) {
+                lnm5 += '<li class="li-list2">' + lmnpq5[i].cityName + '</li>';
+            }
+            $(".ul-listlq").append(lnm5);
+
+            $(function() {
+                //限制字符个数
+                $(".li-list2").each(function() {
+                    var maxwidth = 3;
+                    if ($(this).text().length > maxwidth) {
+                        $(this).text($(this).text().substring(0, maxwidth));
+                        $(this).html($(this).html() + '…');
+                    }
+                });
+            });
+            //rstw
+            var rstw1 = data.data.cityList.r;
+            var rstw2 = data.data.cityList.s;
+            var rstw3 = data.data.cityList.t;
+            var rstw4 = data.data.cityList.w;
+            var rst1 = "";
+            for (var i = 0; i < rstw1.length; i++) {
+                rst1 += '<li class="li-list3">' + rstw1[i].cityName + '</li>';
+            }
+            $(".ul-listrw").append(rst1);
+
+            var rst2 = "";
+            for (var i = 0; i < rstw2.length; i++) {
+                rst2 += '<li class="li-list3">' + rstw2[i].cityName + '</li>';
+            }
+            $(".ul-listrw").append(rst2);
+            var rst3 = "";
+            for (var i = 0; i < rstw3.length; i++) {
+                rst3 += '<li class="li-list3">' + rstw3[i].cityName + '</li>';
+            }
+            $(".ul-listrw").append(rst3);
+            $(function() {
+                //限制字符个数
+                $(".li-list3").each(function() {
+                    var maxwidth = 3;
+                    if ($(this).text().length > maxwidth) {
+                        $(this).text($(this).text().substring(0, maxwidth));
+                        $(this).html($(this).html() + '…');
+                    }
+                });
+            });
+
+            //xyz
+            var xyz1 = data.data.cityList.x;
+            var xyz2 = data.data.cityList.y;
+            var xyz3 = data.data.cityList.z;
+
+            var xy1 = "";
+            for (var i = 0; i < xyz1.length; i++) {
+                xy1 += '<li class="li-list4">' + xyz1[i].cityName + '</li>';
+            }
+            $(".ul-listxz").append(xy1);
+
+            var xy2 = "";
+            for (var i = 0; i < xyz2.length; i++) {
+                xy2 += '<li class="li-list4">' + xyz2[i].cityName + '</li>';
+            }
+            $(".ul-listxz").append(xy2);
+            var xy3 = "";
+            for (var i = 0; i < xyz3.length; i++) {
+                xy3 += '<li class="li-list4">' + xyz3[i].cityName + '</li>';
+            }
+            $(".ul-listxz").append(xy3);
+            $(function() {
+                //限制字符个数
+                $(".li-list4").each(function() {
+                    var maxwidth = 3;
+                    if ($(this).text().length > maxwidth) {
+                        $(this).text($(this).text().substring(0, maxwidth));
+                        $(this).html($(this).html() + '…');
+                    }
+                });
+            });
+        });
+}
+//展开合上
+$(".onclickimg").click(function() {
+    $(".ajaxcitylist").toggle();
+});
+$(".navigation1").css("background", "#5944C3");
+//鼠标移入移出事件
+$(".navigation1").mouseenter(function() {
+    $(".ajaxlist1").show();
+    $(".ajaxlist1").siblings().hide();
+    $(".navigation1").css("background", "#5944C3");
+    $(".navigation1").siblings().css("background", "");
+});
+
+$(".navigation2").mouseenter(function() {
+    $(".ajaxlist2").show();
+    $(".ajaxlist2").siblings().hide();
+    $(".navigation2").css("background", "#5944C3");
+    $(".navigation2").siblings().css("background", "");
+});
+$(".navigation3").mouseenter(function() {
+    $(".ajaxlist3").show();
+    $(".ajaxlist3").siblings().hide();
+    $(".navigation3").css("background", "#5944C3");
+    $(".navigation3").siblings().css("background", "");
+});
+$(".navigation4").mouseenter(function() {
+    $(".ajaxlist4").show();
+    $(".ajaxlist4").siblings().hide();
+    $(".navigation4").css("background", "#5944C3");
+    $(".navigation4").siblings().css("background", "");
+});
+$(".navigation5").mouseenter(function() {
+    $(".ajaxlist5").show();
+    $(".ajaxlist5").siblings().hide();
+    $(".navigation5").css("background", "#5944C3");
+    $(".navigation5").siblings().css("background", "");
+});
+$(".navigation6").mouseenter(function() {
+    $(".ajaxlist6").show();
+    $(".ajaxlist6").siblings().hide();
+    $(".navigation6").css("background", "#5944C3");
+    $(".navigation6").siblings().css("background", "");
+});
+
+function GetUrlByParamName(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var URL = decodeURI(window.location.search);
+    var r = URL.substr(1).match(reg);
+    if (r != null) {
+        //decodeURI() 函数可对 encodeURI() 函数编码过的 URI 进行解码  
+        return decodeURI(r[2]);
+    };
+    return null;
+};

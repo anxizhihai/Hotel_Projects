@@ -82,4 +82,8 @@ function Paymentorder() {
 //提交订单
 $(".btn").click(function() {
     Paymentorder();
-})
+});
+//我的订单
+$(".span1").click(function() {
+    window.location.href = "Order_list.html"
+});

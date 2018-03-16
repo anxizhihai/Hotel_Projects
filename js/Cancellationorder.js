@@ -65,3 +65,7 @@ function details() {
 
         })
 }
+//我的订单
+$(".span1").click(function() {
+    window.location.href = "Order_list.html"
+});

@@ -48,7 +48,7 @@ $(".peravator").attr("src", img_url + localStorage.pit);
 //发送get请求
 function Listorder(status, orderNo, customerName, checkTime, page) {
     var token = localStorage.token;
-
+    let img_url = "https://dev.apis.sh/P7G0PaMgO/static/";
     $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/order/list", {
             method: "get", // get请求
             dataType: 'json', // 当服务器发来html元素时，需要如此设置，使ajax进行html解析
@@ -68,10 +68,8 @@ function Listorder(status, orderNo, customerName, checkTime, page) {
         .done(function(data) { // 处理ajax成功的回调
             var olist = data.data.orderList;
             num = Math.ceil(data.data.count / 4);
-            // num = 5;
             $(".li6").html(num);
             if (num == 3) {
-
                 $(".li4").hide();
                 $(".li5").hide();
                 $(".li6").hide();
@@ -81,16 +79,13 @@ function Listorder(status, orderNo, customerName, checkTime, page) {
                 $(".li5").hide();
                 $(".li6").hide();
             } else if (num == 4) {
-
                 $(".li5").hide();
                 $(".li6").hide();
             } else if (num == 5) {
-
                 $(".li5").hide();
             }
             var str = '';
             for (var i = 0; i < olist.length; i++) {
-
                 str += '<div class="list">';
                 str += '<span class="list1">' + olist[i].orderNo + '</span>';
                 str += '<span class="list2">';
@@ -104,8 +99,13 @@ function Listorder(status, orderNo, customerName, checkTime, page) {
                 str += '<a target = "_blank" href="Order_details.html?id=' + olist[i]._id + '">';
                 str += '<span class="list7">查看</span>';
                 str += '</a>';
-                str += '<a target = "_blank" href="Cancellationorder.html?id=' + olist[i]._id + '"><span class="list8">取消预订</span> </a>';
-                str += '<a target = "_blank" href="payment.html?id=' + olist[i]._id + '"> <span class="list9">去支付</span> </a>';
+                if (olist[i].status == '预定中') {
+                    str += '<a target = "_blank" href="Cancellationorder.html?id=' + olist[i]._id + '"><span class="list8">取消预订</span> </a>';
+                } else if (olist[i].status == '待支付') {
+                    str += '<a target = "_blank" href="payment.html?id=' + olist[i]._id + '&hotelone=' + olist[i].hotel.name + '&House_big=' + olist[i].roomName + '&pay=' + olist[i].amount + '&src=' + img_url + olist[i].hotel.picture["0"] + '"> <span class="list9">去支付</span> </a>';
+                } else if (olist[i].status == '已完成') {
+                    str += '<a target = "_blank" href="evaluate.html?id=' + olist[i]._id + '"> <span class="list9">去评价</span> </a>';
+                }
                 str += '</div>';
                 str += '<div class="hr"></div>';
             }
@@ -204,7 +204,7 @@ $(".li4").click(function() {
     console.log($(this).text());
     Listorder('', '', '', '', on4);
 });
-$(".li5").click(function() {
+$(".li6").click(function() {
     var on5 = $(this).text();
     console.log($(this).text());
     Listorder('', '', '', '', on5);
@@ -218,4 +218,8 @@ $(".btn").click(function() {
     Listorder('', 'order', 'orders', '', 1);
 
 
-})
+});
+//我的订单
+$(".span1").click(function() {
+    window.location.href = "Order_list.html"
+});

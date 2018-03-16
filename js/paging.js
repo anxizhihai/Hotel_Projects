@@ -62,7 +62,4 @@ $(".ul").on("click", "#li2", function() {
 
 $(".ul").on("click", "li", function() {
     var limit = $(this).val();
-
-
-
-})
+});

@@ -86,3 +86,7 @@ $(".passpit").click(function() {
 
 $(".peravator").attr("src", img_url + localStorage.pit);
 $(".pernames").html(localStorage.username);
+//我的订单
+$(".span1").click(function() {
+    window.location.href = "Order_list.html"
+});

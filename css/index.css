@@ -232,7 +232,7 @@ html {
 .navigation_bar {
     width: 514px;
     height: 43px;
-    border-bottom: 1px solid #5944C3;
+    z-Index: 99999999;
 }
 
 .navigation_bar span {
@@ -255,16 +255,10 @@ html {
 /*搜索按钮*/
 
 .search {
-    width: 1400px;
+    width: 200px;
     height: 60px;
     margin: 0 auto;
     margin-top: 12px;
-    position: relative;
-}
-
-.searchbutton {
-    position: absolute;
-    left: 680px;
 }
 
 .btn {
@@ -273,11 +267,11 @@ html {
     border: none;
     width: 81px;
     height: 36px;
+    cursor: pointer;
 }
 
 .ajaxlist1 {
     width: 480px;
-    height: 140px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -286,7 +280,6 @@ html {
 
 .ajaxlist2 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -295,7 +288,6 @@ html {
 
 .ajaxlist3 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -304,7 +296,6 @@ html {
 
 .ajaxlist4 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -313,7 +304,6 @@ html {
 
 .ajaxlist5 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -322,7 +312,6 @@ html {
 
 .ajaxlist6 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -330,7 +319,7 @@ html {
 }
 
 .ajaxlistrm {
-    padding-left: 1px;
+    padding-left: 20px;
 }
 
 .ajaxlistxz {
@@ -354,7 +343,7 @@ html {
 }
 
 .li-list0 {
-    width: 70px;
+    width: 76px;
     height: 30px;
     float: left;
     list-style-type: none;
@@ -362,7 +351,7 @@ html {
 }
 
 .li-list {
-    width: 90px;
+    width: 76px;
     height: 30px;
     float: left;
     list-style-type: none;
@@ -370,7 +359,7 @@ html {
 }
 
 .li-list1 {
-    width: 90px;
+    width: 76px;
     height: 30px;
     float: left;
     list-style-type: none;
@@ -378,7 +367,7 @@ html {
 }
 
 .li-list2 {
-    width: 90px;
+    width: 76px;
     height: 30px;
     float: left;
     list-style-type: none;
@@ -386,7 +375,7 @@ html {
 }
 
 .li-list3 {
-    width: 90px;
+    width: 76px;
     height: 30px;
     float: left;
     list-style-type: none;
@@ -394,7 +383,7 @@ html {
 }
 
 .li-list4 {
-    width: 90px;
+    width: 76px;
     height: 30px;
     float: left;
     list-style-type: none;
@@ -574,4 +563,67 @@ html {
     line-height: 60px;
     text-align: center;
     cursor: pointer;
+}
+
+.ul-listrm:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-list:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listgk:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listlq:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listrw:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listxz:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-list,
+.ul-listgk,
+.ul-listlq,
+.ul-listrw,
+.ul-listxz,
+.ul-listrm {
+    padding-left: 0px;
 }

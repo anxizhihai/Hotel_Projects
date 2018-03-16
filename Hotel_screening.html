@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="choicedatebox">
-                <div class="choicedate"><input class="choicedatein" style="text-indent:1em;" type="text" readonly="true" placeholder="请选择日期"><img src="img/icon_day.png"></div>
+                <div class="choicedate"><input class="choicedatein" id="choicedatein" style="text-indent:1em;" type="text" readonly="true" placeholder="请选择日期"><img src="img/icon_day.png"></div>
                 <!--日期选择器-->
                 <div class="choicetimes" style="display:none">
                     <div class="choicetimes1"></div>
@@ -106,20 +106,20 @@
                         <div class="choicebox">
                             <span class="choice_boxs1span1">位置</span>
                             <span class="choice_boxs1span2">不限</span>
-                            <span class="choice_boxs1span3">行政区<img src="img/icon_down.png"><div class="district" style="display:none" >
+                            <span class="choice_boxs1span3">行政区<img class="aimgs" src="img/icon_down.png"><div class="district" style="display:none" >
                                 <ul class="districtul"></ul>
                             </div></span>
-                            <span class="choice_boxs1span4">商圈<img src="img/icon_down.png"><div class="Business_Circles" style="display:none">
+                            <span class="choice_boxs1span4">商圈<img class="aimgs1" src="img/icon_down.png"><div class="Business_Circles" style="display:none">
                                 <ul class="Business_Circlesul"></ul>
                             </div></span>
-                            <span class="choice_boxs1span5">地铁站<img src="img/icon_down.png">
+                            <span class="choice_boxs1span5">地铁站<img class="aimgs2" src="img/icon_down.png">
                            </span>
-                            <span class="choice_boxs1span6">车站<img src="img/icon_down.png"><div class="Station" style="display:none" >
+                            <span class="choice_boxs1span6">车站<img class="aimgs3" src="img/icon_down.png"><div class="Station" style="display:none" >
                                <div class="Station1"><img > <ul class="Stationul1"></ul></div>
                                <div class="Station2"><img>  <ul class="Stationul2"></ul></div>
                                <div class="Station3"><img>  <ul class="Stationul3"></ul></div>
                             </div></span>
-                            <span class="choice_boxs1span7">景点<img src="img/icon_down.png"><div class="Scenic" style="display:none">
+                            <span class="choice_boxs1span7">景点<img class="aimgs4" src="img/icon_down.png"><div class="Scenic" style="display:none">
                                 <ul class="Scenic_ul"></ul>
                             </div></span>
                             <div class="Metro_Station" style="display:none">
@@ -193,8 +193,9 @@
     </div>
 </body>
 <link href="css/Hotel_screening.css" rel="stylesheet" type="text/css" />
+<script src="js/laydate.js"></script>
 <script src="js/Hotel_screening.js"></script>
-<script src="js/index.js"></script>
+<!-- <script src="js/index.js"></script> -->
 <script src="js/Hotel_screeningstyle.js"></script>
 
 </html>

@@ -54,13 +54,18 @@
                     <div class="one">
                         <span class="Predetermined_information">预订信息</span>
                         <span class="House_name">  <span class="House_names">房型名称：</span><span class="House_big">豪华大床房</span></span>
-                        <span class="Check_intime">   <span class="Check_intimes">入住时间：</span><input type="text" class="Checkin1"><span class="checkspan">至</span><input type="text" class="Checkin2"></span>
-                        <span class="Numberofroom"> <span class="Numberofrooms">房间数量：</span><input style="padding-left:10px;" type="tel" class="Numberroom"><span class="redues"><img  src="img/icon_minus.png" style="margin-top:12px; "></span><span class="add"><img  src="img/icon_plus.png" style="margin-top:12px;"></span></span>
+                        <span class="Check_intime">   <span class="Check_intimes">入住时间：</span><span class="inspan1"><input type="text" id="Checkin1" class="Checkin1"><span class="weekspan01">星期一</span><img class="imgspan01" src="img/icon_day.png"></span>
+                        <span class="checkspan">至</span>
+                        <span class="inspan2"><input type="text" id="Checkin2" class="Checkin2"><span class="weekspan02">星期一</span><img class="imgspan02" src="img/icon_day.png"></span>
+                        </span>
+                        <span class="Numberofroom"> <span class="Numberofrooms">房间数量：</span><input style="padding-left:10px;" type="tel" class="Numberroom"><span class="redues"><img  src="img/icon_minus.png" style="margin-top:12px; "></span>
+                        <span class="add"><img src="img/icon_plus.png" style="margin-top:12px;"></span>
+                        </span>
                         <span class="Totalcost">   <span class="Totalcosts">房费总计：</span><span class="cost">¥</span><span class="costs">788</span></span>
                     </div>
                     <div class="two">
                         <span class="Checkininformation">入住信息</span>
-                        <span class="GU">  <span class="Guestname">*</span><span class="Guestnames">客人姓名：</span><input type="text" class="Guests"></span>
+                        <span class="GU">  <span class="Guestname">*</span><span class="Guestnames">客人姓名：</span><input type="text" class="Guests" placeholder="只需要填写一位"></span>
                         <span class="CT">    <span class="Contactnumber">*</span><span class="Contactnumbers">联系电话：</span><input type="text" class="Contact"></span>
                     </div>
                     <div class="thr">
@@ -82,6 +87,7 @@
     </div>
 </body>
 <link href="css/predetermine.css" rel="stylesheet" type="text/css" />
+<script src="js/laydate.js"></script>
 <script src="js/predetermine.js"></script>
 
 </html>
