@@ -104,7 +104,7 @@ function Listorder(status, orderNo, customerName, checkTime, page) {
                 } else if (olist[i].status == '待支付') {
                     str += '<a target = "_blank" href="payment.html?id=' + olist[i]._id + '&hotelone=' + olist[i].hotel.name + '&House_big=' + olist[i].roomName + '&pay=' + olist[i].amount + '&src=' + img_url + olist[i].hotel.picture["0"] + '"> <span class="list9">去支付</span> </a>';
                 } else if (olist[i].status == '已完成') {
-                    str += '<a target = "_blank" href="evaluate.html?id=' + olist[i]._id + '"> <span class="list9">去评价</span> </a>';
+                    str += '<a target = "_blank" href="evaluate.html?id=' + olist[i]._id + '&pictmore=' + olist[i].hotel.picture["1"] + '&roomName=' + olist[i].roomName + '&name=' + olist[i].hotel.name + '&amount=' + olist[i].amount + '"> <span class="list9">去评价</span> </a>';
                 }
                 str += '</div>';
                 str += '<div class="hr"></div>';

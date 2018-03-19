@@ -1,4 +1,17 @@
 $(document).ready(function() {
+    // var a = [{
+    //         name: '云海大酒店',
+    //         location: new BMap.Point(116.307852, 40.057031)
+    //     }, {
+    //         name: '天上人间酒店',
+    //         location: new BMap.Point(116.313082, 40.047674)
+    //     }, {
+    //         name: '太阳酒店',
+    //         location: new BMap.Point(116.328749, 40.026922)
+    //     }, {
+    //         name: '海滨酒店',
+    //         location: new BMap.Point(116.347571, 39.988698)
+    //     }]
     //引入日历插件
     laydate.render({
         elem: '#choicedatein',
@@ -10,6 +23,7 @@ $(document).ready(function() {
             console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
         }
     });
+
 
     //调用添加城市函数
     getCaptchareceive();
@@ -456,6 +470,8 @@ function hotelist(page) {
             }
         })
         .done(function(data) {
+            var a = [];
+            console.log(a);
             var Dynamic = data.data.hotelList;
             var str = "";
             for (var i = 0; i < Dynamic.length; i++) {
@@ -501,6 +517,8 @@ function hotelist(page) {
                 str += '</div>'
                 str += '</div>';
                 str += '</div>';
+
+
             }
             $(".dynamiclists").append(str);
             $(function() {
@@ -513,6 +531,38 @@ function hotelist(page) {
                     }
                 });
             });
+            console.log(Dynamic[0].name);
+            console.log(Dynamic[0].location.lat);
+            console.log(Dynamic[0].location.lng);
+            const map = new BMap.Map("container") // 创建一个地图实例，其参数可以是元素id也可以是元素对象
+            map.centerAndZoom(new BMap.Point(116.328749, 40.026922), 13) // 初始化地图，设置中心点坐标和地图级别
+            map.enableScrollWheelZoom(true) // 启用滚轮放大缩小，默认禁用
+            map.addControl(new BMap.ScaleControl()) // 添加控件，比例尺控件
+            map.addControl(new BMap.NavigationControl({
+                    type: BMAP_NAVIGATION_CONTROL_ZOOM
+                })) // 添加控件，平移缩放控件，type值表示只显示控件的缩放部分功能
+            const hotelDataArry = [{
+                name: Dynamic[0].name,
+                location: new BMap.Point(Dynamic[0].location.lat, Dynamic[0].location.lng)
+            }, {
+                name: '天上人间酒店',
+                location: new BMap.Point(116.313082, 40.047674)
+            }, {
+                name: '太阳酒店',
+                location: new BMap.Point(116.328749, 40.026922)
+            }, {
+                name: '海滨酒店',
+                location: new BMap.Point(116.347571, 39.988698)
+            }]
+            hotelDataArry.forEach(el => {
+                const marker = new BMap.Marker(el.location) // 创建标注点
+                map.addOverlay(marker) // 向地图添加标注点
+                marker.setLabel(new BMap.Label(el.name, {
+                        offset: new BMap.Size(20)
+                    })) // 向标注点添加标注文本
+            })
+
+
         });
 }
 
@@ -645,6 +695,7 @@ function Hotel_lists(page, overallRating, price, distance) {
 }
 //搜索按钮
 $(".btn").click(function() {
+    $(".dynamiclists1").show();
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
     Hotel_lists('1');
@@ -724,7 +775,7 @@ function getValue3() {
         }
     }
 }
-
+var page;
 //懒加载
 //页面一打开整个西安的酒店
 function lazyLoad() {
@@ -732,7 +783,7 @@ function lazyLoad() {
     return function() {
         var loading = document.getElementById("loading");
         if (loading.getBoundingClientRect().top + loading.offsetHeight < document.documentElement.clientHeight) {
-            // hotelist(page++);
+            hotelist(page++);
         }
     }
 }

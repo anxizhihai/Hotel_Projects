@@ -945,6 +945,7 @@ html {
     width: 1010px;
     /* height: 1400px; */
     margin: 0 auto;
+    position: relative;
 }
 
 .dynamiclists1 {
@@ -1162,4 +1163,11 @@ html {
 .re3 {
     display: inline-block;
     margin-left: 20px;
+}
+
+#container {
+    height: 447px;
+    width: 323px;
+    position: absolute;
+    left: 800px;
 }

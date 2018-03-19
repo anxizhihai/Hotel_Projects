@@ -129,92 +129,53 @@ function comment(page, sort) {
             }
         })
         .done(function(data) {
-            page(0);
-            var comments = data.data.evaluate;
-            var numb = data.data.count;
-
-            function page(l) {
-                // var num = '10';
-                var num = Math.ceil(data.data.count / 3);
-
-                str = '';
-                str += '<span class="li1" id="li1"><img class="images" src="img/icon_back_month.png"></span>'
-                for (var i = 1; i <= num; i++) {
-                    str += '<li class="li" value="' + i + '" >' + i + '';
+            if (data.code == "success") {
+                var comments = data.data.evaluate;
+                var numb = data.data.count;
+                num = Math.ceil(data.data.count / 3);
+                $(".li6").html(10);
+                if (num == 3) {
+                    $(".li4").hide();
+                    $(".li5").hide();
+                    $(".li6").hide();
+                } else if (num == 2) {
+                    $(".li3").hide();
+                    $(".li4").hide();
+                    $(".li5").hide();
+                    $(".li6").hide();
+                } else if (num == 4) {
+                    $(".li5").hide();
+                    $(".li6").hide();
+                } else if (num == 5) {
+                    $(".li5").hide();
                 }
-                var html = '<span class="li" id="li3">...</span>';
-                str += '<li class="li" id="li2">向右</li>';
-                $(".ul").html(str);
-                $(".li").siblings().hide();
-                $(".li1").show();
-                $(".li").eq(0 + l).show();
-                $(".li").eq(1 + l).show();
-                $(".li").eq(2 + l).show();
 
-                $(".li").eq(-2).show();
-                $(".li").eq(-1).show();
-                $(".li").eq(-3).after(html);
+
+                // 处理ajax成功的回调
+
+                var str = '';
+                for (var i = 0; i < comments.length; i++) {
+                    str += '<div class="commain">';
+                    str += '<div class="cominside">';
+                    //头像姓名
+                    str += '<div class="avatarname">'
+                    str += '<img class="avatar" src="' + img_url + comments[i].account.avatar + '">'
+                    str += '<span class="avnames">' + comments[i].account.name + '</span>';
+                    str += '</div>'
+                        //时间和评论图片
+                    str += '<div class="timespitc">';
+                    str += '<div class="create"><span class="starsss"><img src="img/icon_star.png"><img src="img/icon_star.png"><img src="img/icon_star.png"><img src="img/icon_star.png"><img src="img/icon_star.png"></span><span class="create_time">' + comments[i].create_time + '</span></div>';
+                    str += '<div class="content"><span class="contents">' + comments[i].content + '</span></div>';
+                    str += '<div class="picture"><img class="pictures" src="' + comments[i].picture["0"] + '"><img class="picturess" src="' + comments[i].picture["1"] + '"></div>'
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                }
+                $(".commentlist").html(str);
+            } else if (data.code == "evaluate_not_found") {
+
+                $(".commentlist").html('<div class="empts">暂无评论哦</div>');
             }
-            var l = 1;
-            //如果l小于0,不能点击
-            $(".ul").on("click", ".li1", function() {
-                if (l >= 0) {
-                    page(l--);
-                    $("#li2").attr("disabled", false);
-                    $("#li2").css("color", "");
-                } else {
-                    $(".li1").attr("disabled", true);
-                    $(".li1").css("color", "red");
-                }
-            });
-            //如果l到达15,让按钮不能点击
-            $(".ul").on("click", "#li2", function() {
-                if (l <= 2) {
-                    page(++l);
-                    $(".li1").attr("disabled", false);
-                    $(".li1").css("color", "");
-
-                } else if (l > 2) {
-                    $("#li2").attr("disabled", true);
-                    $("#li2").css("color", "red");
-                }
-                //如果l到达最后5位，让...隐藏
-                switch (l) {
-                    case 2:
-                        $("#li3").hide();
-                        break;
-                    case 3:
-                        $("#li3").hide();
-                }
-
-            });
-
-            $(".ul").on("click", "li", function() {
-                var limit = $(this).val();
-                comment(limit);
-            })
-
-            // 处理ajax成功的回调
-            var str = '';
-            for (var i = 0; i < comments.length; i++) {
-                str += '<div class="commain">';
-                str += '<div class="cominside">';
-                //头像姓名
-                str += '<div class="avatarname">'
-                str += '<img class="avatar" src="' + img_url + comments[i].account.avatar + '">'
-                str += '<span class="avnames">' + comments[i].account.name + '</span>';
-                str += '</div>'
-                    //时间和评论图片
-                str += '<div class="timespitc">';
-                str += '<div class="create"><span class="starsss"><img src="img/icon_star.png"><img src="img/icon_star.png"><img src="img/icon_star.png"><img src="img/icon_star.png"><img src="img/icon_star.png"></span><span class="create_time">' + comments[i].create_time + '</span></div>';
-                str += '<div class="content"><span class="contents">' + comments[i].content + '</span></div>';
-                str += '<div class="picture"><img class="pictures" src="' + comments[i].picture["0"] + '"><img class="picturess" src="' + comments[i].picture["1"] + '"></div>'
-                str += '</div>';
-                str += '</div>';
-                str += '</div>';
-            }
-            $(".commentlist").html(str);
-
         })
 }
 
@@ -295,9 +256,11 @@ function hotelroom(checkTime) {
             }
         })
         .done(function(data) {
+
             // 处理ajax成功的回调
             if (data.code == "success") {
                 var hotelrooms = data.data.roomList;
+
                 var str = '';
                 for (var i = 0; i < hotelrooms.length; i++) {
                     str += '<div class="deluxe_king">'
@@ -327,32 +290,32 @@ function hotelroom(checkTime) {
         })
 }
 
-// $("#queryinput2").bind("input propertychange", function() {
-//     var times1 = $(".queryinput1").val();
-//     var times2 = $(".queryinput2").val();
-//     var date1 = new Date(times1);
-//     var date2 = new Date(times2);
-//     var date3 = date2.getTime() - date1.getTime(); //时间差的毫秒数
-//     var days = Math.floor(date3 / (24 * 3600 * 1000));
-//     console.log(days);
-//     $(".alldates").html(days);
-// });
+$(".li1").click(function() {
+    var on1 = $(this).text();
+    console.log($(this).text());
+    comment(on1, 'all');
+});
+$(".li2").click(function() {
+    var on2 = $(this).text();
+    console.log($(this).text());
+    comment(on2, 'all');
 
-// $(".queryinput2").bind(function() {
-//         var times1 = $(".queryinput1").val();
-//         var times2 = $(".queryinput2").val();
-//         console.log("-----------");
-//         console.log(times1);
-//         console.log(times2);
-//         console.log("-------------")
-//         var date1 = new Date(times1);
-//         var date2 = new Date(times2);
-//         var date3 = date2.getTime() - date1.getTime(); //时间差的毫秒数
-//         var days = Math.floor(date3 / (24 * 3600 * 1000));
-//         console.log(days);
-//         $(".alldates").html(days);
+});
+$(".li3").click(function() {
+    var on3 = $(this).text();
+    comment(on3, 'all');
 
-//     })
+});
+$(".li4").click(function() {
+    var on4 = $(this).text();
+    comment(on4, 'all');
+
+});
+$(".li6").click(function() {
+    var on5 = $(this).text();
+    comment(on5, 'all');
+
+});
 //点击查询酒店房间列表
 $(".btnquery").click(function() {
     $('.house').empty();
@@ -385,4 +348,64 @@ function getQueryString(name) {
     } else {
         return null;
     }
+}
+
+//分页
+var num;
+var i = 1;
+var q = 2;
+var w = 3;
+var e = 4;
+$(".liimg1").click(function() {
+    addition();
+});
+//减
+$(".liimg").click(function() {
+    subtraction();
+});
+$(".li4").click(function() {
+    addition();
+})
+$(".li1").click(function() {
+    subtraction();
+})
+
+function subtraction() {
+    if (i > 1) {
+        for (var j = 0; j < 1; j++) {
+            i--;
+            q--;
+            w--;
+            e--;
+        }
+        $(".li1").html(i);
+        $(".li2").html(q);
+        $(".li3").html(w);
+        $(".li4").html(e);
+
+    }
+    if (e < num && e > 1) {
+        $(".li5").show();
+        $(".li6").show();
+    }
+}
+
+function addition() {
+    if (e < num - 1) {
+        for (var j = 0; j < 1; j++) {
+            i++;
+            q++;
+            w++;
+            e++;
+        }
+        $(".li1").html(i);
+        $(".li2").html(q);
+        $(".li3").html(w);
+        $(".li4").html(e);
+    }
+    if (e == num - 1) {
+        $(".li5").hide();
+
+    }
+
 }

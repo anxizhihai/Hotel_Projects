@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/lodash.js/4.17.4/lodash.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=B948NQq1qIlkU0P8dtRV2YBeDjs57ZbD"></script>
 </head>
 
 <body>
@@ -169,33 +170,30 @@
                 </div>
             </div>
         </div>
-
-
         <div class="recommend">
             <span class="recommend1">推荐</span>
             <span class="recommend2"><span class="re1">评价</span><img class="recommend22" src="img/icon_arrow_down1.png"></span>
             <span class="recommend3"><span class="re2">价格</span><img class="recommend32" src="img/icon_arrow_down1.png"></span>
             <span class="recommend4"><span class="re3">距离</span><img class="recommend42" src="img/icon_arrow_up1.png"></span>
         </div>
-        <div class="dynamiclists"></div>
-        <div class="dynamiclists1"></div>
+
+        <div class="dynamiclists">
+            <div id="container"></div>
+        </div>
+        <div class="dynamiclists1" style="display:none">
+        </div>
         <div class="loading" id="loading">
             <img class="loadings" src="img/loading.gif">
         </div>
         <!--页脚-->
         <footer class="footer">
             <div class="footers"><span></span>Copyright © 2017 apis.sh All Rights Reserved | 陕ICP备15013925号- 3</div>
-
         </footer>
-
-
-
     </div>
 </body>
 <link href="css/Hotel_screening.css" rel="stylesheet" type="text/css" />
 <script src="js/laydate.js"></script>
 <script src="js/Hotel_screening.js"></script>
-<!-- <script src="js/index.js"></script> -->
 <script src="js/Hotel_screeningstyle.js"></script>
 
 </html>
