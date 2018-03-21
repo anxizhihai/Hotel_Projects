@@ -257,7 +257,6 @@ html {
 
 .ajaxlist1 {
     width: 480px;
-    height: 150px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -266,7 +265,6 @@ html {
 
 .ajaxlist2 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -275,7 +273,6 @@ html {
 
 .ajaxlist3 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -285,7 +282,6 @@ html {
 
 .ajaxlist4 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -294,7 +290,6 @@ html {
 
 .ajaxlist5 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -303,7 +298,6 @@ html {
 
 .ajaxlist6 {
     width: 480px;
-    height: 500px;
     background: #FFFFFF;
     border: 1px solid #D3DCE6;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
@@ -579,6 +573,57 @@ html {
     color: #3E3E3E;
     letter-spacing: 0;
     line-height: 20px;
+}
+
+.dstation {
+    width: 387px;
+    /* height: 114px; */
+    background: #FFFFFF;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15), 0 0 6px 0 rgba(0, 0, 0, 0.15);
+    position: absolute;
+}
+
+.Metro {
+    padding-left: 15px;
+    float: left;
+    /* margin-right: 30px; */
+    cursor: pointer;
+}
+
+.Metro1 {
+    padding-left: 15px;
+    float: left;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.sat {
+    width: 387px;
+}
+
+.sat:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.stations1:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.litwo {
+    float: left;
+    list-style-type: none;
+    width: 60px;
+    margin-right: 10px;
 }
 
 .Metro_Station {
@@ -945,7 +990,7 @@ html {
     width: 1010px;
     /* height: 1400px; */
     margin: 0 auto;
-    position: relative;
+    /* position: relative; */
 }
 
 .dynamiclists1 {
@@ -1170,4 +1215,63 @@ html {
     width: 323px;
     position: absolute;
     left: 800px;
+}
+
+.ul-listrm:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-list:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listgk:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listlq:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listrw:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.ul-listxz:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.dstation {
+    float: left;
+    margin-left: 350px;
 }

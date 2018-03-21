@@ -1,17 +1,5 @@
 $(document).ready(function() {
-    // var a = [{
-    //         name: '云海大酒店',
-    //         location: new BMap.Point(116.307852, 40.057031)
-    //     }, {
-    //         name: '天上人间酒店',
-    //         location: new BMap.Point(116.313082, 40.047674)
-    //     }, {
-    //         name: '太阳酒店',
-    //         location: new BMap.Point(116.328749, 40.026922)
-    //     }, {
-    //         name: '海滨酒店',
-    //         location: new BMap.Point(116.347571, 39.988698)
-    //     }]
+
     //引入日历插件
     laydate.render({
         elem: '#choicedatein',
@@ -53,7 +41,7 @@ var i = 0;
 $(".choice_boxs1span3").click(function() {
     $(".district").toggle();
     $(".Business_Circles").hide();
-    $(".Metro_Station").hide();
+    $(".dstation").hide();
     $(".Station").hide();
     $(".Scenic").hide();
     $(".districtul li").remove();
@@ -74,7 +62,7 @@ var j = 0
 $(".choice_boxs1span4").click(function() {
     $(".Business_Circles").toggle();
     $(".district").hide();
-    $(".Metro_Station").hide();
+    $(".dstation").hide();
     $(".Station").hide();
     $(".Scenic").hide();
     $(".Business_Circlesul li").remove();
@@ -89,51 +77,23 @@ $(".choice_boxs1span4").click(function() {
     }
 });
 //地铁站
-var h = 0;
 $(".choice_boxs1span5").click(function() {
-    $(".Metro_Station").toggle();
-    $(".Business_Circles").hide();
-    $(".district").hide();
-    $(".Station").hide();
-    $(".Scenic").hide();
-    h++;
-    if (h % 2 == 1) {
-        $(".aimgs2").css("transform", "rotate(180deg)");
-        $(".aimgs2").css("transition", "transform 2s");
-    } else {
-        $(".aimgs2").css("transform", "rotate(360deg)");
-        $(".aimgs2").css("transition", "transform 2s");
-    }
-});
-$(".Line_number1").click(function() {
-    $(".Metro_Stationul2").hide();
-    $(".Metro_Stationul3").hide();
-    $(".Metro_Stationul1").show();
-    $(".Metro_Stationul1 li").remove();
+    $(".dstation").toggle();
+    $(".dstation").empty();
     Metro();
-});
-$(".Line_number2").click(function() {
-    $(".Metro_Stationul1").hide();
-    $(".Metro_Stationul3").hide();
-    $(".Metro_Stationul2").show();
-    $(".Metro_Stationul1 li").remove();
-    $(".Metro_Stationul2 li").remove();
-    Metro();
-});
 
-$(".Line_number3").click(function() {
-    $(".Metro_Stationul1").hide();
-    $(".Metro_Stationul2").hide();
-    $(".Metro_Stationul3").show();
-    $(".Metro_Stationul3 li").remove();
-    Metro();
+    $(".Business_Circles").hide();
+    $(".Station").hide();
+    $(".district").hide();
+    $(".Scenic").hide();
+
 });
 //车站
 var f = 0;
 $(".choice_boxs1span6").click(function() {
     $(".Station").toggle();
     $(".Business_Circles").hide();
-    $(".Metro_Station").hide();
+    $(".dstation").hide();
     $(".district").hide();
     $(".Scenic").hide();
     $(".Stationul1 li").remove();
@@ -154,7 +114,7 @@ var z = 0;
 $(".choice_boxs1span7").click(function() {
     $(".Scenic").toggle();
     $(".Business_Circles").hide();
-    $(".Metro_Station").hide();
+    $(".dstation").hide();
     $(".Station").hide();
     $(".district").hide();
     $(".Scenic_ul li").remove();
@@ -248,6 +208,7 @@ $(".Business_Circlesul").on("click", "li ", function() {
     $(".choicemessagein").val(Tresult);
 });
 //地铁
+
 function Metro() {
     let cityName = $(".choicecityin").val();
     $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/city/subway/station", {
@@ -260,76 +221,47 @@ function Metro() {
                 withCredentials: true // 允许跨域名储存和访问cookie
             }
         })
-        .done(function(data) {
-            // 处理ajax成功的回调 1号线
-            var station = data.data.subway["地铁1号线"];
-
-            var str = "";
-            for (var i = 0; i < station.length; i++) {
-                str += '<li class="Metro_Stationli">' + station[i] + '</li>';
+        .done(function(data) { // 处理ajax成功的回调
+            var station = data.data.subway;
+            var arr = Object.keys(station);
+            var str1 = '';
+            str1 += '<div class="stations1">';
+            for (var i = 0; i < arr.length; i++) {
+                str1 += '<ul class="Metro1" value="' + i + '" >' + arr[i] + '';
+                str1 += '</ul>';
             }
-            $(".Metro_Stationul1").append(str);
-            $(function() {
-                //限制字符个数
-                $(".Business_Circlesli").each(function() {
-                    var maxwidth = 3;
-                    if ($(this).text().length > maxwidth) {
-                        $(this).text($(this).text().substring(0, maxwidth));
-                        $(this).html($(this).html() + '…');
-                    }
-                });
-            });
-
-            //2号线
-            var station = data.data.subway["地铁2号线"];
-            var str = "";
-            for (var i = 0; i < station.length; i++) {
-                str += '<li class="Metro_Stationli">' + station[i] + '</li>';
+            str1 += '</div>'
+            var str = '';
+            str += '<div class="sat">';
+            for (var i = 0; i < arr.length; i++) {
+                // str += '<ul class="Metro">' + arr[i] + '';
+                str += '<ul class="Metro" value="' + i + '" style="display:none">';
+                for (var j = 0; j < station[arr[i]].length; j++) {
+                    str += '<li class="litwo">' + station[arr[i]][j] + ' ';
+                }
+                str += '</li>'
+                str += '</ul>';
             }
-            $(".Metro_Stationul2").append(str);
-            $(function() {
-                //限制字符个数
-                $(".Business_Circlesli").each(function() {
-                    var maxwidth = 3;
-                    if ($(this).text().length > maxwidth) {
-                        $(this).text($(this).text().substring(0, maxwidth));
-                        $(this).html($(this).html() + '…');
-                    }
-                });
-            });
-            //3号线
-            var station = data.data.subway["地铁3号线"];
-            var str = "";
-            for (var i = 0; i < station.length; i++) {
-                str += '<li class="Metro_Stationli">' + station[i] + '</li>';
-            }
-            $(".Metro_Stationul3").append(str);
-            $(function() {
-                //限制字符个数
-                $(".Business_Circlesli").each(function() {
-                    var maxwidth = 3;
-                    if ($(this).text().length > maxwidth) {
-                        $(this).text($(this).text().substring(0, maxwidth));
-                        $(this).html($(this).html() + '…');
-                    }
-                });
-            });
-        })
+            str += '</div>'
+            $(".dstation").append(str1);
+            $(".dstation").append(str);
+        });
 }
-$(".Metro_Stationul2").on("click", "li ", function() {
-    var Uarry = $(".Metro_Stationul2 li"); //获取所有的li元素
-    var count = $(this).index(); //获取li的下标  
+
+
+$(".dstation").on("click", ".Metro1", function() {
+
+    var Uarry = $(".Metro1"); //获取所有的ul元素
+    var count = $(this).index(); //获取ul的下标  
     var Tresult = Uarry.eq(count).text();
-    $(".choicemessagein").val(Tresult);
+    var Uarrys = $(".Metro");
+    var counts = $(this).index();
+    console.log(counts);
+    $(".Metro").eq(counts).show();
+    $(".Metro").eq(counts).siblings().hide();
 });
-$(".Metro_Stationul1").on("click", "li ", function() {
-    var Uarry = $(".Metro_Stationul1 li"); //获取所有的li元素
-    var count = $(this).index(); //获取li的下标  
-    var Tresult = Uarry.eq(count).text();
-    $(".choicemessagein").val(Tresult);
-});
-$(".Metro_Stationul3").on("click", "li ", function() {
-    var Uarry = $(".Metro_Stationul3 li"); //获取所有的li元素
+$(".dstation").on("click", "li ", function() {
+    var Uarry = $(".dstation li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
     var Tresult = Uarry.eq(count).text();
     $(".choicemessagein").val(Tresult);
@@ -535,7 +467,7 @@ function hotelist(page) {
             console.log(Dynamic[0].location.lat);
             console.log(Dynamic[0].location.lng);
             const map = new BMap.Map("container") // 创建一个地图实例，其参数可以是元素id也可以是元素对象
-            map.centerAndZoom(new BMap.Point(116.328749, 40.026922), 13) // 初始化地图，设置中心点坐标和地图级别
+            map.centerAndZoom(new BMap.Point(Dynamic[0].location.lng, Dynamic[0].location.lat), 13) // 初始化地图，设置中心点坐标和地图级别
             map.enableScrollWheelZoom(true) // 启用滚轮放大缩小，默认禁用
             map.addControl(new BMap.ScaleControl()) // 添加控件，比例尺控件
             map.addControl(new BMap.NavigationControl({
@@ -543,16 +475,19 @@ function hotelist(page) {
                 })) // 添加控件，平移缩放控件，type值表示只显示控件的缩放部分功能
             const hotelDataArry = [{
                 name: Dynamic[0].name,
-                location: new BMap.Point(Dynamic[0].location.lat, Dynamic[0].location.lng)
+                location: new BMap.Point(Dynamic[0].location.lng, Dynamic[0].location.lat)
             }, {
-                name: '天上人间酒店',
-                location: new BMap.Point(116.313082, 40.047674)
+                name: Dynamic[1].name,
+                location: new BMap.Point(Dynamic[1].location.lng, Dynamic[1].location.lat)
             }, {
-                name: '太阳酒店',
-                location: new BMap.Point(116.328749, 40.026922)
+                name: Dynamic[2].name,
+                location: new BMap.Point(Dynamic[2].location.lng, Dynamic[2].location.lat)
             }, {
-                name: '海滨酒店',
-                location: new BMap.Point(116.347571, 39.988698)
+                name: Dynamic[3].name,
+                location: new BMap.Point(Dynamic[3].location.lng, Dynamic[3].location.lat)
+            }, {
+                name: Dynamic[4].name,
+                location: new BMap.Point(Dynamic[4].location.lng, Dynamic[4].location.lat)
             }]
             hotelDataArry.forEach(el => {
                 const marker = new BMap.Marker(el.location) // 创建标注点
@@ -707,12 +642,14 @@ var va2;
 var va3;
 //推荐
 $(".recommend1").click(function() {
+    $(".dynamiclists1").show();
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
     Hotel_lists('1', '', '', '');
 });
 //按照评价
 $(".recommend2").click(function() {
+    $(".dynamiclists1").show();
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
     va1 = 1;
@@ -722,6 +659,7 @@ $(".recommend2").click(function() {
 });
 //按照价格
 $(".recommend3").click(function() {
+    $(".dynamiclists1").show();
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
     va1 = '';
@@ -731,6 +669,7 @@ $(".recommend3").click(function() {
 });
 //按照距离
 $(".recommend4").click(function() {
+    $(".dynamiclists1").show();
     $('.dynamiclists1').empty();
     $(".dynamiclists").hide();
     va1 = '';
@@ -1020,9 +959,52 @@ function getCaptchareceive() {
             });
         });
 }
+
+$(".ul-listrm").on("click", "li ", function() {
+    var Uarry = $(".ul-listrm li"); //获取所有的li元素
+    var count = $(this).index(); //获取li的下标  
+    var Tresult = Uarry.eq(count).text();
+    $(".choicecityin").val(Tresult);
+    $(".ajaxcity").hide();
+});
+$(".ul-list").on("click", "li ", function() {
+    var Uarry = $(".ul-list li"); //获取所有的li元素
+    var count = $(this).index(); //获取li的下标  
+    var Tresult = Uarry.eq(count).text();
+    $(".choicecityin").val(Tresult);
+});
+$(".ul-listgk").on("click", "li ", function() {
+    var Uarry = $(".ul-listgk li"); //获取所有的li元素
+    var count = $(this).index(); //获取li的下标  
+    var Tresult = Uarry.eq(count).text();
+    $(".choicecityin").val(Tresult);
+});
+$(".ul-listlq").on("click", "li ", function() {
+    var Uarry = $(".ul-listlq li"); //获取所有的li元素
+    var count = $(this).index(); //获取li的下标  
+    var Tresult = Uarry.eq(count).text();
+    $(".choicecityin").val(Tresult);
+});
+$(".ul-listrw").on("click", "li ", function() {
+    var Uarry = $(".ul-listrw li"); //获取所有的li元素
+    var count = $(this).index(); //获取li的下标  
+    var Tresult = Uarry.eq(count).text();
+    $(".choicecityin").val(Tresult);
+});
+$(".ul-listxz").on("click", "li ", function() {
+    var Uarry = $(".ul-listxz li"); //获取所有的li元素
+    var count = $(this).index(); //获取li的下标  
+    var Tresult = Uarry.eq(count).text();
+    $(".choicecityin").val(Tresult);
+});
+
+
 //展开合上
 $(".onclickimg").click(function() {
-    $(".ajaxcitylist").toggle();
+    $(".ajaxcity").show();
+    $(".ajaxcitylist").show();
+    // $(".ajaxcitylist").toggle();
+
 });
 $(".navigation1").css("background", "#5944C3");
 //鼠标移入移出事件
