@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>地铁</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .dstation {
+            width: 400px;
+        }
+        
+        .Metro {
+            padding-left: 0px;
+            float: left;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+        
+        .Metro1 {
+            padding-left: 0px;
+            float: left;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+        
+        .dstation:after {
+            content: '';
+            display: block;
+            clear: both;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+        
+        .stations1:after {
+            content: '';
+            display: block;
+            clear: both;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+        
+        .litwo {
+            float: left;
+            list-style-type: none;
+            width: 60px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn" type="button">车站</button>
+    <input class="stationsss" type="text">
+    <div class="dstation">
+    </div>
+
+</body>
+<script>
+    $(".btn").click(function() {
+        $(".dstation").empty();
+        Metro();
+    });
+
+    function Metro() {
+        let cityName = $(".stationsss").val();
+        $.ajax("https://dev.apis.sh/P7G0PaMgO/v1/city/subway/station", {
+                method: "get", // get请求
+                dataType: 'json', // 当服务器发来html元素时，需要如此设置，使ajax进行html解析
+                data: {
+                    cityName: cityName
+                },
+                xhrFields: {
+                    withCredentials: true // 允许跨域名储存和访问cookie
+                }
+            })
+            .done(function(data) { // 处理ajax成功的回调
+                var station = data.data.subway;
+                console.log(station);
+                var arr = Object.keys(station);
+                console.log(arr[2]);
+                var str1 = '';
+                str1 += '<div class="stations1">';
+                for (var i = 0; i < arr.length; i++) {
+                    str1 += '<ul class="Metro1" value="' + i + '" >' + arr[i] + '';
+                    str1 += '</ul>';
+                }
+                str1 += '</div>'
+                var str = '';
+                str += '<div>';
+                for (var i = 0; i < arr.length; i++) {
+                    // str += '<ul class="Metro">' + arr[i] + '';
+                    str += '<ul class="Metro" value="' + i + '" style="display:none">';
+                    for (var j = 0; j < station[arr[i]].length; j++) {
+                        str += '<li class="litwo">' + station[arr[i]][j] + ' ';
+                    }
+                    str += '</li>'
+                    str += '</ul>';
+                }
+                str += '</div>'
+                $(".dstation").append(str1);
+                $(".dstation").append(str);
+            });
+    }
+    $(".dstation").on("click", ".Metro1", function() {
+        var Uarry = $(".Metro1"); //获取所有的ul元素
+        var count = $(this).index(); //获取ul的下标  
+        var Tresult = Uarry.eq(count).text();
+        var Uarrys = $(".Metro");
+        var counts = $(this).index();
+        console.log(counts);
+        $(".Metro").eq(counts).show();
+        $(".Metro").eq(counts).siblings().hide();
+    });
+</script>
+
+</html>

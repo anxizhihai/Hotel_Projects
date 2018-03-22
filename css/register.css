@@ -65,6 +65,7 @@ html {
     height: 597px;
     background: url("../img/bg_sign.png");
     margin-top: 20px;
+    padding-top: 30px;
 }
 
 .footer {
@@ -81,17 +82,14 @@ html {
     letter-spacing: 0;
     width: 488px;
     height: 18px;
-    margin-left: 600px;
-    line-height: 60px;
+    margin-left: 500px;
 }
 
 .loginbox {
     width: 753px;
     height: 550px;
     background: #FFFFFF;
-    float: right;
-    margin-top: 20px;
-    margin-right: 540px;
+    margin: 0 auto;
 }
 
 .accountloginp {

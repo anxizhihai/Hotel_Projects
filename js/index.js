@@ -230,44 +230,57 @@ function getCaptchareceive() {
         });
 }
 $(".ul-listrm").on("click", "li ", function() {
+
     var Uarry = $(".ul-listrm li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
     var Tresult = Uarry.eq(count).text();
     $(".choicecityin").val(Tresult);
+    $(".ajaxcity").hide();
 });
 $(".ul-list").on("click", "li ", function() {
     var Uarry = $(".ul-list li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
     var Tresult = Uarry.eq(count).text();
     $(".choicecityin").val(Tresult);
+    $(".ajaxcity").hide();
+
 });
 $(".ul-listgk").on("click", "li ", function() {
     var Uarry = $(".ul-listgk li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
     var Tresult = Uarry.eq(count).text();
     $(".choicecityin").val(Tresult);
+    $(".ajaxcity").hide();
+
 });
 $(".ul-listlq").on("click", "li ", function() {
     var Uarry = $(".ul-listlq li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
     var Tresult = Uarry.eq(count).text();
     $(".choicecityin").val(Tresult);
+    $(".ajaxcity").hide();
+
 });
 $(".ul-listrw").on("click", "li ", function() {
     var Uarry = $(".ul-listrw li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
     var Tresult = Uarry.eq(count).text();
     $(".choicecityin").val(Tresult);
+    $(".ajaxcity").hide();
+
 });
 $(".ul-listxz").on("click", "li ", function() {
     var Uarry = $(".ul-listxz li"); //获取所有的li元素
     var count = $(this).index(); //获取li的下标  
     var Tresult = Uarry.eq(count).text();
     $(".choicecityin").val(Tresult);
+    $(".ajaxcity").hide();
+
 });
 //展开合上
 $(".onclickimg").click(function() {
-    $(".ajaxcitylist").toggle();
+    $(".ajaxcity").show();
+    $(".ajaxcitylist").show();
 });
 $(".navigation1").css("background", "#5944C3");
 //鼠标移入移出事件
